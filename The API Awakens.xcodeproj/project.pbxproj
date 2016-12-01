@@ -12,6 +12,28 @@
 		A64111491DF05FB700D9DE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64111471DF05FB700D9DE57 /* Main.storyboard */; };
 		A641114B1DF05FB700D9DE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A641114A1DF05FB700D9DE57 /* Assets.xcassets */; };
 		A641114E1DF05FB700D9DE57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A641114C1DF05FB700D9DE57 /* LaunchScreen.storyboard */; };
+		A64111671DF0600100D9DE57 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111551DF0600100D9DE57 /* appicon@2x.png */; };
+		A64111681DF0600100D9DE57 /* appicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111561DF0600100D9DE57 /* appicon@3x.png */; };
+		A64111691DF0600100D9DE57 /* icon-characters-2.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111571DF0600100D9DE57 /* icon-characters-2.png */; };
+		A641116A1DF0600100D9DE57 /* icon-characters.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A64111581DF0600100D9DE57 /* icon-characters.pdf */; };
+		A641116B1DF0600100D9DE57 /* icon-characters.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111591DF0600100D9DE57 /* icon-characters.png */; };
+		A641116C1DF0600100D9DE57 /* icon-characters@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A641115A1DF0600100D9DE57 /* icon-characters@2x.png */; };
+		A641116D1DF0600100D9DE57 /* icon-characters@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A641115B1DF0600100D9DE57 /* icon-characters@3x.png */; };
+		A641116E1DF0600100D9DE57 /* icon-starship.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A641115C1DF0600100D9DE57 /* icon-starship.pdf */; };
+		A641116F1DF0600100D9DE57 /* icon-starships.png in Resources */ = {isa = PBXBuildFile; fileRef = A641115D1DF0600100D9DE57 /* icon-starships.png */; };
+		A64111701DF0600100D9DE57 /* icon-starships@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A641115E1DF0600100D9DE57 /* icon-starships@2x.png */; };
+		A64111711DF0600100D9DE57 /* icon-starships@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A641115F1DF0600100D9DE57 /* icon-starships@3x.png */; };
+		A64111721DF0600100D9DE57 /* icon-vehicle.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A64111601DF0600100D9DE57 /* icon-vehicle.pdf */; };
+		A64111731DF0600100D9DE57 /* icon-vehicles-2.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111611DF0600100D9DE57 /* icon-vehicles-2.png */; };
+		A64111741DF0600100D9DE57 /* icon-vehicles.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111621DF0600100D9DE57 /* icon-vehicles.png */; };
+		A64111751DF0600100D9DE57 /* icon-vehicles@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111631DF0600100D9DE57 /* icon-vehicles@2x.png */; };
+		A64111761DF0600100D9DE57 /* icon-vehicles@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111641DF0600100D9DE57 /* icon-vehicles@3x.png */; };
+		A64111771DF0600100D9DE57 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111651DF0600100D9DE57 /* iTunesArtwork.png */; };
+		A64111781DF0600100D9DE57 /* star-wars-api.ai in Resources */ = {isa = PBXBuildFile; fileRef = A64111661DF0600100D9DE57 /* star-wars-api.ai */; };
+		A641117D1DF0601400D9DE57 /* star-wars-api-characters.png in Resources */ = {isa = PBXBuildFile; fileRef = A64111791DF0601400D9DE57 /* star-wars-api-characters.png */; };
+		A641117E1DF0601400D9DE57 /* star-wars-api-home.png in Resources */ = {isa = PBXBuildFile; fileRef = A641117A1DF0601400D9DE57 /* star-wars-api-home.png */; };
+		A641117F1DF0601400D9DE57 /* star-wars-api-starships.png in Resources */ = {isa = PBXBuildFile; fileRef = A641117B1DF0601400D9DE57 /* star-wars-api-starships.png */; };
+		A64111801DF0601400D9DE57 /* star-wars-api-vehicles.png in Resources */ = {isa = PBXBuildFile; fileRef = A641117C1DF0601400D9DE57 /* star-wars-api-vehicles.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +44,28 @@
 		A641114A1DF05FB700D9DE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A641114D1DF05FB700D9DE57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A641114F1DF05FB700D9DE57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A64111551DF0600100D9DE57 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appicon@2x.png"; path = "../API_Awakens_Img/appicon@2x.png"; sourceTree = "<group>"; };
+		A64111561DF0600100D9DE57 /* appicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "appicon@3x.png"; path = "../API_Awakens_Img/appicon@3x.png"; sourceTree = "<group>"; };
+		A64111571DF0600100D9DE57 /* icon-characters-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-characters-2.png"; path = "../API_Awakens_Img/icon-characters-2.png"; sourceTree = "<group>"; };
+		A64111581DF0600100D9DE57 /* icon-characters.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "icon-characters.pdf"; path = "../API_Awakens_Img/icon-characters.pdf"; sourceTree = "<group>"; };
+		A64111591DF0600100D9DE57 /* icon-characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-characters.png"; path = "../API_Awakens_Img/icon-characters.png"; sourceTree = "<group>"; };
+		A641115A1DF0600100D9DE57 /* icon-characters@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-characters@2x.png"; path = "../API_Awakens_Img/icon-characters@2x.png"; sourceTree = "<group>"; };
+		A641115B1DF0600100D9DE57 /* icon-characters@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-characters@3x.png"; path = "../API_Awakens_Img/icon-characters@3x.png"; sourceTree = "<group>"; };
+		A641115C1DF0600100D9DE57 /* icon-starship.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "icon-starship.pdf"; path = "../API_Awakens_Img/icon-starship.pdf"; sourceTree = "<group>"; };
+		A641115D1DF0600100D9DE57 /* icon-starships.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-starships.png"; path = "../API_Awakens_Img/icon-starships.png"; sourceTree = "<group>"; };
+		A641115E1DF0600100D9DE57 /* icon-starships@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-starships@2x.png"; path = "../API_Awakens_Img/icon-starships@2x.png"; sourceTree = "<group>"; };
+		A641115F1DF0600100D9DE57 /* icon-starships@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-starships@3x.png"; path = "../API_Awakens_Img/icon-starships@3x.png"; sourceTree = "<group>"; };
+		A64111601DF0600100D9DE57 /* icon-vehicle.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "icon-vehicle.pdf"; path = "../API_Awakens_Img/icon-vehicle.pdf"; sourceTree = "<group>"; };
+		A64111611DF0600100D9DE57 /* icon-vehicles-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-vehicles-2.png"; path = "../API_Awakens_Img/icon-vehicles-2.png"; sourceTree = "<group>"; };
+		A64111621DF0600100D9DE57 /* icon-vehicles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-vehicles.png"; path = "../API_Awakens_Img/icon-vehicles.png"; sourceTree = "<group>"; };
+		A64111631DF0600100D9DE57 /* icon-vehicles@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-vehicles@2x.png"; path = "../API_Awakens_Img/icon-vehicles@2x.png"; sourceTree = "<group>"; };
+		A64111641DF0600100D9DE57 /* icon-vehicles@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-vehicles@3x.png"; path = "../API_Awakens_Img/icon-vehicles@3x.png"; sourceTree = "<group>"; };
+		A64111651DF0600100D9DE57 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../API_Awakens_Img/iTunesArtwork.png; sourceTree = "<group>"; };
+		A64111661DF0600100D9DE57 /* star-wars-api.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "star-wars-api.ai"; path = "../API_Awakens_Img/star-wars-api.ai"; sourceTree = "<group>"; };
+		A64111791DF0601400D9DE57 /* star-wars-api-characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-wars-api-characters.png"; path = "../API_Awakens_Mockups/star-wars-api-characters.png"; sourceTree = "<group>"; };
+		A641117A1DF0601400D9DE57 /* star-wars-api-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-wars-api-home.png"; path = "../API_Awakens_Mockups/star-wars-api-home.png"; sourceTree = "<group>"; };
+		A641117B1DF0601400D9DE57 /* star-wars-api-starships.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-wars-api-starships.png"; path = "../API_Awakens_Mockups/star-wars-api-starships.png"; sourceTree = "<group>"; };
+		A641117C1DF0601400D9DE57 /* star-wars-api-vehicles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-wars-api-vehicles.png"; path = "../API_Awakens_Mockups/star-wars-api-vehicles.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +82,7 @@
 		A64111371DF05FB700D9DE57 = {
 			isa = PBXGroup;
 			children = (
+				A64111811DF0601B00D9DE57 /* Resources */,
 				A64111421DF05FB700D9DE57 /* The API Awakens */,
 				A64111411DF05FB700D9DE57 /* Products */,
 			);
@@ -62,6 +107,51 @@
 				A641114F1DF05FB700D9DE57 /* Info.plist */,
 			);
 			path = "The API Awakens";
+			sourceTree = "<group>";
+		};
+		A64111811DF0601B00D9DE57 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A64111831DF0603400D9DE57 /* MockUps */,
+				A64111821DF0602D00D9DE57 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A64111821DF0602D00D9DE57 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				A64111551DF0600100D9DE57 /* appicon@2x.png */,
+				A64111561DF0600100D9DE57 /* appicon@3x.png */,
+				A64111571DF0600100D9DE57 /* icon-characters-2.png */,
+				A64111581DF0600100D9DE57 /* icon-characters.pdf */,
+				A64111591DF0600100D9DE57 /* icon-characters.png */,
+				A641115A1DF0600100D9DE57 /* icon-characters@2x.png */,
+				A641115B1DF0600100D9DE57 /* icon-characters@3x.png */,
+				A641115C1DF0600100D9DE57 /* icon-starship.pdf */,
+				A641115D1DF0600100D9DE57 /* icon-starships.png */,
+				A641115E1DF0600100D9DE57 /* icon-starships@2x.png */,
+				A641115F1DF0600100D9DE57 /* icon-starships@3x.png */,
+				A64111601DF0600100D9DE57 /* icon-vehicle.pdf */,
+				A64111611DF0600100D9DE57 /* icon-vehicles-2.png */,
+				A64111621DF0600100D9DE57 /* icon-vehicles.png */,
+				A64111631DF0600100D9DE57 /* icon-vehicles@2x.png */,
+				A64111641DF0600100D9DE57 /* icon-vehicles@3x.png */,
+				A64111651DF0600100D9DE57 /* iTunesArtwork.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		A64111831DF0603400D9DE57 /* MockUps */ = {
+			isa = PBXGroup;
+			children = (
+				A64111661DF0600100D9DE57 /* star-wars-api.ai */,
+				A64111791DF0601400D9DE57 /* star-wars-api-characters.png */,
+				A641117A1DF0601400D9DE57 /* star-wars-api-home.png */,
+				A641117B1DF0601400D9DE57 /* star-wars-api-starships.png */,
+				A641117C1DF0601400D9DE57 /* star-wars-api-vehicles.png */,
+			);
+			name = MockUps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,9 +214,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A64111781DF0600100D9DE57 /* star-wars-api.ai in Resources */,
+				A641116F1DF0600100D9DE57 /* icon-starships.png in Resources */,
+				A641116A1DF0600100D9DE57 /* icon-characters.pdf in Resources */,
+				A64111741DF0600100D9DE57 /* icon-vehicles.png in Resources */,
 				A641114E1DF05FB700D9DE57 /* LaunchScreen.storyboard in Resources */,
+				A64111691DF0600100D9DE57 /* icon-characters-2.png in Resources */,
+				A641116E1DF0600100D9DE57 /* icon-starship.pdf in Resources */,
+				A64111671DF0600100D9DE57 /* appicon@2x.png in Resources */,
+				A64111721DF0600100D9DE57 /* icon-vehicle.pdf in Resources */,
+				A641116B1DF0600100D9DE57 /* icon-characters.png in Resources */,
+				A641116C1DF0600100D9DE57 /* icon-characters@2x.png in Resources */,
+				A64111701DF0600100D9DE57 /* icon-starships@2x.png in Resources */,
+				A641116D1DF0600100D9DE57 /* icon-characters@3x.png in Resources */,
+				A64111751DF0600100D9DE57 /* icon-vehicles@2x.png in Resources */,
+				A641117E1DF0601400D9DE57 /* star-wars-api-home.png in Resources */,
+				A64111711DF0600100D9DE57 /* icon-starships@3x.png in Resources */,
+				A64111801DF0601400D9DE57 /* star-wars-api-vehicles.png in Resources */,
+				A641117D1DF0601400D9DE57 /* star-wars-api-characters.png in Resources */,
 				A641114B1DF05FB700D9DE57 /* Assets.xcassets in Resources */,
 				A64111491DF05FB700D9DE57 /* Main.storyboard in Resources */,
+				A64111731DF0600100D9DE57 /* icon-vehicles-2.png in Resources */,
+				A64111681DF0600100D9DE57 /* appicon@3x.png in Resources */,
+				A64111771DF0600100D9DE57 /* iTunesArtwork.png in Resources */,
+				A64111761DF0600100D9DE57 /* icon-vehicles@3x.png in Resources */,
+				A641117F1DF0601400D9DE57 /* star-wars-api-starships.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +375,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RS93W547X8;
 				INFOPLIST_FILE = "The API Awakens/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zzheads.The-API-Awakens";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -276,6 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = RS93W547X8;
 				INFOPLIST_FILE = "The API Awakens/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zzheads.The-API-Awakens";
 				PRODUCT_NAME = "$(TARGET_NAME)";
