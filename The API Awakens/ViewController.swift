@@ -24,8 +24,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppColor.Black.color
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
+        navigationController?.navigationBar.barStyle = .blackOpaque
+
         for type in UnitType.allTypes {
             let button = UIButton()
             button.setBackgroundImage(type.image, for: .normal)
@@ -55,8 +55,9 @@ class ViewController: UIViewController {
             return
         }
         let unitViewController = UnitViewController(unitType: unitType)
-        let navigationController = UINavigationController(rootViewController: unitViewController)
-        present(navigationController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(unitViewController, animated: true)
+//        let navigationController = UINavigationController(rootViewController: unitViewController)
+//        self.present(navigationController, animated: true, completion: nil)
     }
 }
 

@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         UIApplication.shared.statusBarStyle = .lightContent
+        UINavigationBar.appearance().barTintColor = UIColor(red: 42/255.0, green: 45/255.0, blue: 47/255.0, alpha: 1.0)
         
         let viewController = ViewController()
         let navigationController = UINavigationController(rootViewController: viewController)

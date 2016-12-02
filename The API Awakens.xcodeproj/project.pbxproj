@@ -38,6 +38,7 @@
 		A641118E1DF090AF00D9DE57 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A641118D1DF090AF00D9DE57 /* UnitViewController.swift */; };
 		A64111911DF094EF00D9DE57 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111901DF094EF00D9DE57 /* UnitType.swift */; };
 		A64111931DF0B9CC00D9DE57 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111921DF0B9CC00D9DE57 /* TransparentButton.swift */; };
+		A64111951DF123CB00D9DE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64111941DF123CB00D9DE57 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		A641118D1DF090AF00D9DE57 /* UnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
 		A64111901DF094EF00D9DE57 /* UnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
 		A64111921DF0B9CC00D9DE57 /* TransparentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
+		A64111941DF123CB00D9DE57 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				A64111431DF05FB700D9DE57 /* AppDelegate.swift */,
 				A641114A1DF05FB700D9DE57 /* Assets.xcassets */,
 				A641114C1DF05FB700D9DE57 /* LaunchScreen.storyboard */,
+				A64111941DF123CB00D9DE57 /* Main.storyboard */,
 				A641114F1DF05FB700D9DE57 /* Info.plist */,
 			);
 			path = "The API Awakens";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A64111781DF0600100D9DE57 /* star-wars-api.ai in Resources */,
+				A64111951DF123CB00D9DE57 /* Main.storyboard in Resources */,
 				A641116F1DF0600100D9DE57 /* icon-starships.png in Resources */,
 				A641116A1DF0600100D9DE57 /* icon-characters.pdf in Resources */,
 				A64111741DF0600100D9DE57 /* icon-vehicles.png in Resources */,
@@ -423,6 +427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zzheads.The-API-Awakens";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -437,6 +442,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zzheads.The-API-Awakens";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
