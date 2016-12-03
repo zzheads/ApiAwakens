@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Character {
+struct Character: Resource {
     let name: String
     let born: String
     let home: String

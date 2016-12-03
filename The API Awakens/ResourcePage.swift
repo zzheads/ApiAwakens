@@ -8,30 +8,74 @@
 
 import Foundation
 
-struct ResourcePage<T> where T: JSONDecodable {
+struct ResourcePage {
     let count: Int
     let next: String?
     let previous: String?
-    var results: [T] = []
+    var results: [JSON] = []
 }
 
 extension ResourcePage: JSONDecodable {
     init?(JSON: JSON) {
         guard
         let count = JSON["count"] as? Int,
-        let next = JSON["next"] as? String?,
-        let previous = JSON["previous"] as? String?,
         let results = JSON["results"] as? [JSON]
             else {
                 return nil
         }
+        let next = JSON["next"] as? String
+        let previous = JSON["previous"] as? String
+
         self.count = count
         self.next = next
         self.previous = previous
-        for json in results {
-            if let value = T(JSON: json) {
-                self.results.append(value)
+        self.results = results
+    }
+
+    static func fetchArray<T>(resourceClass: T.Type, completion: @escaping ([T]) -> Void) where T: JSONDecodable {
+        let apiClient = ResourceAPIClient()
+        var pageNumber = 1
+        var resultArray: [T] = []
+        
+        func recursive(completion: @escaping ([T]) -> Void) {
+            
+            var resourceType: ResourceType = .films("")
+            if resourceClass == Character.self {
+                resourceType = ResourceType.people("?page=\(pageNumber)")
+            }
+            if resourceClass == Vehicle.self {
+                resourceType = ResourceType.vehicles("?page=\(pageNumber)")
+            }
+            if resourceClass == Starship.self {
+                resourceType = ResourceType.starships("?page=\(pageNumber)")
+            }
+            if resourceClass == Planet.self {
+                resourceType = ResourceType.planets("?page=\(pageNumber)")
+            }
+
+            
+            apiClient.fetchResource(resourceType: resourceType, class: ResourcePage.self) { result in
+                switch result {
+                case .Success(let resourcePage):
+                    for jsonElement in resourcePage.results {
+                        if let element = T(JSON: jsonElement) {
+                            resultArray.append(element)
+                        }
+                    }
+                    if resourcePage.next != nil {
+                        pageNumber += 1
+                        //print(pageNumber)
+                        recursive(completion: completion)
+                    } else {
+                        completion(resultArray)
+                        return
+                    }
+                case .Failure(let error): print("\(error.localizedDescription)")
+                }
             }
         }
+        
+        recursive(completion: completion)
     }
 }
+

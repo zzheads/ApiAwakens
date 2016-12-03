@@ -45,7 +45,7 @@ extension APIClient {
     
     func JSONTaskWithRequest(request: URLRequest, completion: @escaping JSONTaskCompletion) -> JSONTask {
         let task = session.dataTask(with: request) { data, response, error in
-            print("Request in JSONTask: \(request)")
+            //print("Request in JSONTask: \(request)")
             guard let HTTPResponse = response as? HTTPURLResponse else {
                 let userInfo = [
                     NSLocalizedDescriptionKey: NSLocalizedString("Missing HTTP Response", comment: "")

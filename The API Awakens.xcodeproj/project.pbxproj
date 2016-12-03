@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A614BCE61DF2D8730010A913 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCE51DF2D8730010A913 /* Vehicle.swift */; };
+		A614BCE81DF2DA480010A913 /* Starship.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCE71DF2DA480010A913 /* Starship.swift */; };
+		A614BCEA1DF2E68B0010A913 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCE91DF2E68B0010A913 /* Resource.swift */; };
+		A614BCEC1DF2E8C80010A913 /* PickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCEB1DF2E8C80010A913 /* PickerDataSource.swift */; };
 		A64111441DF05FB700D9DE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111431DF05FB700D9DE57 /* AppDelegate.swift */; };
 		A64111461DF05FB700D9DE57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111451DF05FB700D9DE57 /* ViewController.swift */; };
 		A641114B1DF05FB700D9DE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A641114A1DF05FB700D9DE57 /* Assets.xcassets */; };
@@ -38,7 +42,6 @@
 		A641118E1DF090AF00D9DE57 /* UnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A641118D1DF090AF00D9DE57 /* UnitViewController.swift */; };
 		A64111911DF094EF00D9DE57 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111901DF094EF00D9DE57 /* UnitType.swift */; };
 		A64111931DF0B9CC00D9DE57 /* TransparentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111921DF0B9CC00D9DE57 /* TransparentButton.swift */; };
-		A64111951DF123CB00D9DE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A64111941DF123CB00D9DE57 /* Main.storyboard */; };
 		A64111971DF12F3600D9DE57 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111961DF12F3600D9DE57 /* APIClient.swift */; };
 		A64111991DF132B700D9DE57 /* Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111981DF132B700D9DE57 /* Schema.swift */; };
 		A641119F1DF16F8B00D9DE57 /* ResourceAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A641119E1DF16F8B00D9DE57 /* ResourceAPIClient.swift */; };
@@ -48,6 +51,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A614BCE51DF2D8730010A913 /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		A614BCE71DF2DA480010A913 /* Starship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Starship.swift; sourceTree = "<group>"; };
+		A614BCE91DF2E68B0010A913 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		A614BCEB1DF2E8C80010A913 /* PickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerDataSource.swift; sourceTree = "<group>"; };
 		A64111401DF05FB700D9DE57 /* The API Awakens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The API Awakens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64111431DF05FB700D9DE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64111451DF05FB700D9DE57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "The API Awakens/ViewController.swift"; sourceTree = "<group>"; };
@@ -81,7 +88,6 @@
 		A641118D1DF090AF00D9DE57 /* UnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitViewController.swift; sourceTree = "<group>"; };
 		A64111901DF094EF00D9DE57 /* UnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
 		A64111921DF0B9CC00D9DE57 /* TransparentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentButton.swift; sourceTree = "<group>"; };
-		A64111941DF123CB00D9DE57 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		A64111961DF12F3600D9DE57 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		A64111981DF132B700D9DE57 /* Schema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
 		A641119E1DF16F8B00D9DE57 /* ResourceAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceAPIClient.swift; sourceTree = "<group>"; };
@@ -129,7 +135,6 @@
 				A64111431DF05FB700D9DE57 /* AppDelegate.swift */,
 				A641114A1DF05FB700D9DE57 /* Assets.xcassets */,
 				A641114C1DF05FB700D9DE57 /* LaunchScreen.storyboard */,
-				A64111941DF123CB00D9DE57 /* Main.storyboard */,
 				A641114F1DF05FB700D9DE57 /* Info.plist */,
 			);
 			path = "The API Awakens";
@@ -186,6 +191,7 @@
 			children = (
 				A64111451DF05FB700D9DE57 /* ViewController.swift */,
 				A641118D1DF090AF00D9DE57 /* UnitViewController.swift */,
+				A614BCEB1DF2E8C80010A913 /* PickerDataSource.swift */,
 			);
 			name = Controllers;
 			path = ..;
@@ -211,9 +217,12 @@
 		A641118F1DF094E200D9DE57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A614BCE91DF2E68B0010A913 /* Resource.swift */,
 				A64111901DF094EF00D9DE57 /* UnitType.swift */,
 				A64111981DF132B700D9DE57 /* Schema.swift */,
 				A64111A11DF1A4CD00D9DE57 /* Character.swift */,
+				A614BCE51DF2D8730010A913 /* Vehicle.swift */,
+				A614BCE71DF2DA480010A913 /* Starship.swift */,
 				A64111AA1DF28DD000D9DE57 /* ResourcePage.swift */,
 				A64111A51DF1C6CB00D9DE57 /* Planet.swift */,
 				A64111A01DF1A08B00D9DE57 /* API */,
@@ -291,7 +300,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A64111781DF0600100D9DE57 /* star-wars-api.ai in Resources */,
-				A64111951DF123CB00D9DE57 /* Main.storyboard in Resources */,
 				A641116F1DF0600100D9DE57 /* icon-starships.png in Resources */,
 				A641116A1DF0600100D9DE57 /* icon-characters.pdf in Resources */,
 				A64111741DF0600100D9DE57 /* icon-vehicles.png in Resources */,
@@ -326,10 +334,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A64111991DF132B700D9DE57 /* Schema.swift in Sources */,
+				A614BCEA1DF2E68B0010A913 /* Resource.swift in Sources */,
 				A64111931DF0B9CC00D9DE57 /* TransparentButton.swift in Sources */,
 				A64111A21DF1A4CD00D9DE57 /* Character.swift in Sources */,
 				A641119F1DF16F8B00D9DE57 /* ResourceAPIClient.swift in Sources */,
+				A614BCE61DF2D8730010A913 /* Vehicle.swift in Sources */,
 				A64111461DF05FB700D9DE57 /* ViewController.swift in Sources */,
+				A614BCE81DF2DA480010A913 /* Starship.swift in Sources */,
 				A64111A61DF1C6CB00D9DE57 /* Planet.swift in Sources */,
 				A641118C1DF07D6B00D9DE57 /* AppColor.swift in Sources */,
 				A64111971DF12F3600D9DE57 /* APIClient.swift in Sources */,
@@ -337,6 +348,7 @@
 				A64111911DF094EF00D9DE57 /* UnitType.swift in Sources */,
 				A64111891DF0789600D9DE57 /* Line.swift in Sources */,
 				A641118E1DF090AF00D9DE57 /* UnitViewController.swift in Sources */,
+				A614BCEC1DF2E8C80010A913 /* PickerDataSource.swift in Sources */,
 				A64111441DF05FB700D9DE57 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

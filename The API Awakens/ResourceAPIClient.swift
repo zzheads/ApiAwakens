@@ -69,9 +69,11 @@ final class ResourceAPIClient: APIClient {
     
     func fetchResource<T>(resourceType: ResourceType, class: T.Type, completion: @escaping (APIResult<T>) -> Void) where T: JSONDecodable {
         let request = resourceType.request
-        print("Request: \(request)")
+        //print("Request: \(request)")
         fetch(request: request, parse: { json -> T? in
-            return T(JSON: json)
+            let value = T(JSON: json)
+            //print("Parsed to \(T.self): \(value)")
+            return value
         }, completion: completion)
     }    
 }

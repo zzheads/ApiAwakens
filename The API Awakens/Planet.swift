@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Planet {
+struct Planet: Resource {
     let name: String
 }
 
