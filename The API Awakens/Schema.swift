@@ -13,7 +13,7 @@ struct Property {
     let type: String
 }
 
-struct ResourceSchema {
+struct Schema {
     let title: String
     let description: String
     let type: String
@@ -34,7 +34,7 @@ extension Property: JSONDecodable {
     }
 }
 
-extension ResourceSchema: JSONDecodable {
+extension Schema: JSONDecodable {
     init?(JSON: JSON) {
         guard
             let title = JSON["title"] as? String,

@@ -16,6 +16,8 @@ typealias JSON = [String: AnyObject]
 typealias JSONTaskCompletion = (JSON?, HTTPURLResponse?, Error?) -> Void
 typealias JSONTask = URLSessionDataTask
 
+typealias JSONArray = [JSON]
+
 enum APIResult<T> {
     case Success(T)
     case Failure(Error)
@@ -43,6 +45,7 @@ extension APIClient {
     
     func JSONTaskWithRequest(request: URLRequest, completion: @escaping JSONTaskCompletion) -> JSONTask {
         let task = session.dataTask(with: request) { data, response, error in
+            print("Request in JSONTask: \(request)")
             guard let HTTPResponse = response as? HTTPURLResponse else {
                 let userInfo = [
                     NSLocalizedDescriptionKey: NSLocalizedString("Missing HTTP Response", comment: "")
@@ -92,7 +95,6 @@ extension APIClient {
                 }
             }
         }
-        
         task.resume()
     }
 }

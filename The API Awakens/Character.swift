@@ -35,5 +35,5 @@ extension Character: JSONDecodable {
         self.height = height
         self.eyes = eyes
         self.hair = hair
-    }
+    }    
 }

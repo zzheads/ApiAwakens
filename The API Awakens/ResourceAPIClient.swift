@@ -9,19 +9,22 @@
 import Foundation
 
 enum ResourceType: Endpoint {
-    case people(Int?)
-    case films(Int?)
-    case starships(Int?)
-    case vehicles(Int?)
-    case species(Int?)
-    case planets(Int?)
+    case people(String)
+    case films(String)
+    case starships(String)
+    case vehicles(String)
+    case species(String)
+    case planets(String)
     
     var baseURL: URL {
         return URL(string: "https://swapi.co/api/")!
     }
     
     var path: String {
-        return "\(self.rawValue)/schema"
+        if self.num.isEmpty {
+            return "\(self.rawValue)/"
+        }
+        return "\(self.rawValue)/\(self.num)"
     }
     
     var request: URLRequest {
@@ -30,10 +33,10 @@ enum ResourceType: Endpoint {
         return request
     }
     
-    var number: Int? {
+    var num: String {
         switch self {
-        case .films(let number), .people(let number), .planets(let number), .species(let number), .starships(let number), .vehicles(let number):
-            return number
+        case .films(let num), .people(let num), .planets(let num), .species(let num), .starships(let num), .vehicles(let num):
+            return num
         }
     }
     
@@ -64,10 +67,11 @@ final class ResourceAPIClient: APIClient {
         self.init(config: .default)
     }
     
-    func fetchSchema(for resourceType: ResourceType, completion: @escaping (APIResult<ResourceSchema>) -> Void) {
+    func fetchResource<T>(resourceType: ResourceType, class: T.Type, completion: @escaping (APIResult<T>) -> Void) where T: JSONDecodable {
         let request = resourceType.request
-        fetch(request: request, parse: { json -> ResourceSchema? in
-            return ResourceSchema(JSON: json)
+        print("Request: \(request)")
+        fetch(request: request, parse: { json -> T? in
+            return T(JSON: json)
         }, completion: completion)
     }    
 }

@@ -30,9 +30,9 @@ enum UnitType: String {
     
     var resourceType: ResourceType {
         switch self {
-        case .Character: return .people(nil)
-        case .Starship: return .starships(nil)
-        case .Vehicle: return .vehicles(nil)
+        case .Character: return .people("")
+        case .Starship: return .starships("")
+        case .Vehicle: return .vehicles("")
         }
     }
     
