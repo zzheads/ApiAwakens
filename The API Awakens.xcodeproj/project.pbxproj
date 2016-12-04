@@ -12,6 +12,7 @@
 		A614BCEA1DF2E68B0010A913 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCE91DF2E68B0010A913 /* Resource.swift */; };
 		A614BCEC1DF2E8C80010A913 /* PickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCEB1DF2E8C80010A913 /* PickerDataSource.swift */; };
 		A614BCEE1DF405530010A913 /* SimpleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCED1DF405530010A913 /* SimpleTableView.swift */; };
+		A614BCF01DF4510A0010A913 /* SmallestLargestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BCEF1DF4510A0010A913 /* SmallestLargestView.swift */; };
 		A64111441DF05FB700D9DE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111431DF05FB700D9DE57 /* AppDelegate.swift */; };
 		A64111461DF05FB700D9DE57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111451DF05FB700D9DE57 /* ViewController.swift */; };
 		A641114B1DF05FB700D9DE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A641114A1DF05FB700D9DE57 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		A614BCE91DF2E68B0010A913 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		A614BCEB1DF2E8C80010A913 /* PickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerDataSource.swift; sourceTree = "<group>"; };
 		A614BCED1DF405530010A913 /* SimpleTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableView.swift; sourceTree = "<group>"; };
+		A614BCEF1DF4510A0010A913 /* SmallestLargestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallestLargestView.swift; sourceTree = "<group>"; };
 		A64111401DF05FB700D9DE57 /* The API Awakens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The API Awakens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64111431DF05FB700D9DE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64111451DF05FB700D9DE57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "The API Awakens/ViewController.swift"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				A64111881DF0789600D9DE57 /* Line.swift */,
 				A64111921DF0B9CC00D9DE57 /* TransparentButton.swift */,
 				A614BCED1DF405530010A913 /* SimpleTableView.swift */,
+				A614BCEF1DF4510A0010A913 /* SmallestLargestView.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				A64111991DF132B700D9DE57 /* Schema.swift in Sources */,
 				A614BCEA1DF2E68B0010A913 /* Resource.swift in Sources */,
 				A64111931DF0B9CC00D9DE57 /* TransparentButton.swift in Sources */,
+				A614BCF01DF4510A0010A913 /* SmallestLargestView.swift in Sources */,
 				A64111A21DF1A4CD00D9DE57 /* Character.swift in Sources */,
 				A641119F1DF16F8B00D9DE57 /* ResourceAPIClient.swift in Sources */,
 				A614BCE61DF2D8730010A913 /* Vehicle.swift in Sources */,

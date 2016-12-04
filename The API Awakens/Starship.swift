@@ -17,6 +17,20 @@ struct Starship: Resource {
     let crew: String
     let labelNames: [String] = ["Make", "Cost", "Length", "Class", "Crew"]
     var labelValues: [String]
+    
+    var measured: Double {
+        if let measured = Double(length.replacingOccurrences(of: ",", with: "")) {
+            return measured * 100
+        }
+        return 0
+    }
+    
+    var costInCredits: Double? {
+        if let costInCredits = Double(cost.replacingOccurrences(of: ",", with: "")) {
+            return costInCredits
+        }
+        return nil
+    }
 }
 
 extension Starship: JSONDecodable {

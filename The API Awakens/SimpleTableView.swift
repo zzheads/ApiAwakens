@@ -14,13 +14,13 @@ class SimpleTableView: UIView {
     var labelNames: [UILabel] = []
     var labelValues: [UILabel] = []
     var lines: [Line] = []
+    static let offsetX: CGFloat = 12
     
     init(headerTitle: String, labelNames: [String], labelValues: [String]) {
         var height: CGFloat = 0
         let widthScreen = UIScreen.main.bounds.size.width
         let offsetFromHeader: CGFloat = 20
         let offsetBetweenLines: CGFloat = 16
-        let offsetX: CGFloat = 8
         
         self.header = UILabel()
         self.header.font = UIFont.boldSystemFont(ofSize: 20)
@@ -47,6 +47,7 @@ class SimpleTableView: UIView {
         
         let rect = CGRect(x: 0, y: 0, width: widthScreen, height: height)
         super.init(frame: rect)
+        self.backgroundColor = AppColor.Black.color
         
         self.addSubview(header)
         header.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +72,7 @@ class SimpleTableView: UIView {
             self.addSubview(labelName)
             labelName.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                labelName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: offsetX),
+                labelName.leftAnchor.constraint(equalTo: self.leftAnchor, constant: SimpleTableView.offsetX),
                 labelName.widthAnchor.constraint(equalToConstant: widthScreen / 5),
                 labelName.topAnchor.constraint(equalTo: currentBottomAnchor, constant: offset)
                 ])
@@ -79,14 +80,14 @@ class SimpleTableView: UIView {
             self.addSubview(labelValue)
             labelValue.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                labelValue.leftAnchor.constraint(equalTo: self.leftAnchor, constant: widthScreen / 5 + offsetX * 2),
-                labelValue.widthAnchor.constraint(equalToConstant: widthScreen * 4 / 5 - offsetX * 3),
+                labelValue.leftAnchor.constraint(equalTo: self.leftAnchor, constant: widthScreen / 5 + SimpleTableView.offsetX * 2),
+                labelValue.widthAnchor.constraint(equalToConstant: widthScreen * 4 / 5 - SimpleTableView.offsetX * 3),
                 labelValue.centerYAnchor.constraint(equalTo: labelName.centerYAnchor)
                 ])
 
             let lineHeight = Int(labelName.font.lineHeight + offsetBetweenLines)
             let y = header.font.lineHeight + offsetFromHeader + CGFloat(lineHeight * (i + 1)) - offsetBetweenLines * 3 / 7
-            let line = Line(xStart: Int(offsetX), xEnd: Int(widthScreen - offsetX * 2), y: Int(y), color: AppColor.Dark.color)
+            let line = Line(xStart: Int(SimpleTableView.offsetX), xEnd: Int(widthScreen - SimpleTableView.offsetX), y: Int(y), color: AppColor.Dark.color)
             self.addSubview(line)
             self.lines.append(line)
 

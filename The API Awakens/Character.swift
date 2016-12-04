@@ -11,12 +11,27 @@ import Foundation
 struct Character: Resource {
     let name: String
     let born: String
-    let home: String
+    var home: String {
+        didSet {
+            self.labelValues = [born, home, height, eyes, hair]
+        }
+    }
     let height: String
     let eyes: String
     let hair: String
     let labelNames: [String] = ["Born", "Home", "Height", "Eyes", "Hair"]
     var labelValues: [String]
+    
+    var measured: Double {
+        if let measured = Double(height.replacingOccurrences(of: ",", with: "")) {
+            return measured
+        }
+        return 0
+    }
+    
+    var costInCredits: Double? {
+        return nil
+    }
 }
 
 extension Character: JSONDecodable {
