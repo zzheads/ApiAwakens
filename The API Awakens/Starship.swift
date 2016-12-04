@@ -15,13 +15,15 @@ struct Starship: Resource {
     let length: String
     let starshipClass: String
     let crew: String
+    let labelNames: [String] = ["Make", "Cost", "Length", "Class", "Crew"]
+    var labelValues: [String]
 }
 
 extension Starship: JSONDecodable {
     init?(JSON: JSON) {
         guard
             let name = JSON["name"] as? String,
-            let make = JSON["created"] as? String,
+            let make = JSON["manufacturer"] as? String,
             let cost = JSON["cost_in_credits"] as? String,
             let length = JSON["length"] as? String,
             let starshipClass = JSON["starship_class"] as? String,
@@ -35,5 +37,6 @@ extension Starship: JSONDecodable {
         self.length = length
         self.starshipClass = starshipClass
         self.crew = crew
+        self.labelValues = [make, cost, length, starshipClass, crew]
     }
 }

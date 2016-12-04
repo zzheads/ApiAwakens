@@ -15,6 +15,8 @@ struct Character: Resource {
     let height: String
     let eyes: String
     let hair: String
+    let labelNames: [String] = ["Born", "Home", "Height", "Eyes", "Hair"]
+    var labelValues: [String]
 }
 
 extension Character: JSONDecodable {
@@ -35,5 +37,6 @@ extension Character: JSONDecodable {
         self.height = height
         self.eyes = eyes
         self.hair = hair
+        self.labelValues = [born, home, height, eyes, hair]
     }    
 }

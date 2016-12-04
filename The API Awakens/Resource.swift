@@ -10,4 +10,6 @@ import Foundation
 
 protocol Resource {
     var name: String { get }
+    var labelNames: [String] { get }
+    var labelValues: [String] { get set }
 }

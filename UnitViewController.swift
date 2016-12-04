@@ -8,8 +8,20 @@
 
 import UIKit
 
-class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class UnitViewController: UIViewController {
     let unitType: UnitType
+
+    var currentItem = 0 {
+        didSet {
+            if (!resourceArray.isEmpty) {
+                tableView.header.text = resourceArray[currentItem].name
+                for i in 0..<resourceArray[currentItem].labelNames.count {
+                    tableView.labelNames[i].text = resourceArray[currentItem].labelNames[i]
+                    tableView.labelValues[i].text = resourceArray[currentItem].labelValues[i]
+                }
+            }
+        }
+    }
     
     lazy var activity: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
@@ -23,8 +35,8 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         return pickerView
     }()
     
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
+    lazy var tableView: SimpleTableView = {
+        let tableView = SimpleTableView(headerTitle: "Loading...", labelNames: ["Loading...", "Loading...", "Loading...", "Loading...", "Loading..."], labelValues: [" ", " ", " ", " ", " "])
         return tableView
     }()
 
@@ -68,15 +80,9 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.view.centerYAnchor)
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 80),
+            tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             ])
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = AppColor.Black.color
-        tableView.separatorColor = .gray
         
         switch self.unitType {
         case .Character:
@@ -86,7 +92,6 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                     print("\(character.name)")
                     self.resourceArray.append(character)
                 }
-                self.tableView.reloadData()
                 self.pickerView.reloadAllComponents()
                 self.activity.stopAnimating()
             }
@@ -97,7 +102,6 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                     print("\(vehicle.name)")
                     self.resourceArray.append(vehicle)
                 }
-                self.tableView.reloadData()
                 self.pickerView.reloadAllComponents()
                 self.activity.stopAnimating()
             }
@@ -108,7 +112,6 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                     print("\(starship.name)")
                     self.resourceArray.append(starship)
                 }
-                self.tableView.reloadData()
                 self.pickerView.reloadAllComponents()
                 self.activity.stopAnimating()
             }
@@ -120,8 +123,12 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    //MARK: -- pickerView
+
+}
+
+//MARK: -- PICKER VIEW
+
+extension UnitViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     //MARK: - PickerView DataSource
     
@@ -141,56 +148,6 @@ class UnitViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        self.currentItem = row
     }
-    
-    //MARK: -- tableView
-    
-    //MARK: - TableView DataSource
-    
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.selectionStyle = .none
-        let homeLabel = UILabel()
-        homeLabel.text = "Homeworld"
-        let makeLabel = UILabel()
-        homeLabel.text = "Make"
-        
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            cell.contentView.addSubview(homeLabel)
-            NSLayoutConstraint.activate([
-                homeLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
-                homeLabel.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor),
-                homeLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
-                homeLabel.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor)
-                ])
-        case (0, 1):
-            cell.contentView.addSubview(makeLabel)
-            NSLayoutConstraint.activate([
-                makeLabel.topAnchor.constraint(equalTo: cell.contentView.topAnchor),
-                makeLabel.rightAnchor.constraint(equalTo: cell.contentView.rightAnchor),
-                makeLabel.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
-                makeLabel.leftAnchor.constraint(equalTo: cell.contentView.leftAnchor)
-                ])
-            
-        default:
-            break
-        }
-        
-        return cell
-    }
-
-
-    //MARK: - TableView Delegates
 }

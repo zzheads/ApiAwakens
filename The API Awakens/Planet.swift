@@ -10,6 +10,8 @@ import Foundation
 
 struct Planet: Resource {
     let name: String
+    let labelNames = ["Name"]
+    var labelValues: [String]
 }
 
 extension Planet: JSONDecodable {
@@ -20,5 +22,6 @@ extension Planet: JSONDecodable {
                 return nil
         }
         self.name = name
+        self.labelValues = [name]
     }
 }

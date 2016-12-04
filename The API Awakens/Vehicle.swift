@@ -15,13 +15,15 @@ struct Vehicle: Resource {
     let length: String
     let vehicleClass: String
     let crew: String
+    let labelNames: [String] = ["Make", "Cost", "Length", "Class", "Crew"]
+    var labelValues: [String]
 }
 
 extension Vehicle: JSONDecodable {
     init?(JSON: JSON) {
         guard
             let name = JSON["name"] as? String,
-            let make = JSON["created"] as? String,
+            let make = JSON["manufacturer"] as? String,
             let cost = JSON["cost_in_credits"] as? String,
             let length = JSON["length"] as? String,
             let vehicleClass = JSON["vehicle_class"] as? String,
@@ -35,5 +37,6 @@ extension Vehicle: JSONDecodable {
         self.length = length
         self.vehicleClass = vehicleClass
         self.crew = crew
+        self.labelValues = [make, cost, length, vehicleClass, crew]
     }
 }
