@@ -10,10 +10,31 @@ import UIKit
 
 class UnitViewController: UIViewController {
     let unitType: UnitType
-
-    enum Currency {
-        case Credits
-        case USD
+    
+    var currentCurrency: Currency = .Credits {
+        didSet {
+            switch self.currentCurrency {
+            case .Credits:
+                creditsButton.setTitleColor(.white, for: .normal)
+                usdButton.setTitleColor(AppColor.Dark.color, for: .normal)
+            case .USD:
+                creditsButton.setTitleColor(AppColor.Dark.color, for: .normal)
+                usdButton.setTitleColor(.white, for: .normal)
+            }
+        }
+    }
+    
+    var currentLength: Measure = .Metrics {
+        didSet {
+            switch self.currentLength {
+            case .Metrics:
+                metricsButton.setTitleColor(.white, for: .normal)
+                englishButton.setTitleColor(AppColor.Dark.color, for: .normal)
+            case .English:
+                englishButton.setTitleColor(.white, for: .normal)
+                metricsButton.setTitleColor(AppColor.Dark.color, for: .normal)
+            }
+        }
     }
     
     var currentItem = 0 {
@@ -47,7 +68,8 @@ class UnitViewController: UIViewController {
     }()
     
     lazy var tableView: SimpleTableView = {
-        let tableView = SimpleTableView(headerTitle: "Loading...", labelNames: [" ", " ", " ", " ", " "], labelValues: [" ", " ", " ", " ", " "])
+        let tableView = SimpleTableView(headerTitle: "Loading...", labelNames: [" "," "," "," "," "], labelValues: [" "," "," "," "," "])
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -65,7 +87,7 @@ class UnitViewController: UIViewController {
         button.setTitle("USD", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(translateCost(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeUnits(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -76,7 +98,7 @@ class UnitViewController: UIViewController {
         button.setTitle("Credits", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(translateCost(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeUnits(sender:)), for: .touchUpInside)
         return button
     }()
 
@@ -87,7 +109,7 @@ class UnitViewController: UIViewController {
         button.setTitle("English", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(translateMeasure(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeUnits(sender:)), for: .touchUpInside)
         return button
     }()
     
@@ -98,7 +120,7 @@ class UnitViewController: UIViewController {
         button.setTitle("Metrics", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(translateMeasure(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeUnits(sender:)), for: .touchUpInside)
         return button
     }()    
     
@@ -118,6 +140,7 @@ class UnitViewController: UIViewController {
         self.view.backgroundColor = AppColor.Black.color
         navigationController?.navigationBar.barStyle = .blackOpaque
         self.navigationItem.title = "\(self.unitType.rawValue)s"
+        self.navigationController?.navigationBar.tintColor = AppColor.Silver.color
         
         self.view.addSubview(activity)
         NSLayoutConstraint.activate([
@@ -147,7 +170,7 @@ class UnitViewController: UIViewController {
             smallestLargest.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             smallestLargest.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width)
             ])
-
+        
         self.view.addSubview(creditsButton)
         NSLayoutConstraint.activate([
             creditsButton.centerYAnchor.constraint(equalTo: self.tableView.labelValues[1].centerYAnchor),
@@ -253,107 +276,83 @@ extension UnitViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
+//MARK: - Listeners
+
+extension UnitViewController {
+
+    func changeUnits(sender: UIButton) {
+        guard let senderTitle = sender.title(for: .normal) else {
+            return
+        }
+        switch senderTitle {
+        case "Credits": currentCurrency = .Credits
+        case "USD": currentCurrency = .USD
+        case "Metrics": currentLength = .Metrics
+        case "English": currentLength = .English
+        default: break
+        }
+    }
+    
+}
+
+
 //MARK: - Helpers
 
 extension UnitViewController {
+    func smallestName(array: [Resource]) -> String {
+        var smallest: Double = -1
+        var smallestName: String = "n/a"
+        if array.isEmpty {
+            return smallestName
+        }
+        for i in 0..<array.count {
+            if let value = array[i].measured {
+                smallest = value
+            }
+        }
+        if smallest == -1 {
+            return smallestName
+        }
+        for element in array {
+            guard let value = element.measured else {
+                break
+            }
+            if value < smallest {
+                smallest = value
+                smallestName = element.name
+            }
+        }
+        return smallestName
+    }
+    
+    func largestName(array: [Resource]) -> String {
+        var largest: Double = -1
+        var largestName: String = "n/a"
+        if array.isEmpty {
+            return largestName
+        }
+        for i in 0..<array.count {
+            if let value = array[i].measured {
+                largest = value
+            }
+        }
+        if largest == -1 {
+            return largestName
+        }
+        for element in array {
+            guard let value = element.measured else {
+                break
+            }
+            if value > largest {
+                largest = value
+                largestName = element.name
+            }
+        }
+        return largestName
+    }
+    
     func calcSmallestLargest() {
-        var smallest: Double
-        var largest: Double
-        
-        if (!self.resourceArray.isEmpty) {
-            smallest = resourceArray[0].measured
-            largest = resourceArray[0].measured
-        } else {
-            return
-        }
-        
-        var smallestName: String = ""
-        var largestName: String = ""
-        for resource in self.resourceArray {
-            if resource.measured > largest {
-                largest = resource.measured
-                largestName = resource.name
-            }
-            if resource.measured < smallest {
-                smallest = resource.measured
-                smallestName = resource.name
-            }
-        }
-        self.smallestLargest.smallestValueLabel.text = smallestName
-        self.smallestLargest.largestValueLabel.text = largestName
-    }
-
-    
-//      MARK: -Translate Galaxy Credits in USDollars
-//      Source: http://www.swtor.com/community/showthread.php?t=442915
-//      Now, we have picked the Sliders which generally sell for 6.7 Galactic Credit Standard (GCS), as they generally seem to use the same type of
-//      food stock as the MacD [s]bread and butter[/s] Burger.
-//      In the US the Big-Mac on average sell for 4.2 dollars in 2012. (8)
-//      the price of a Big Mac was 6.7 GCS in the Galaxy (At Dex's Diner)
-//      the price of a Big Mac was 4.2 USD in the United States (Varies by Store)
-//      the implied purchasing power parity was 1.6 GCS to 1 USD , that is 6.7/4.2 = 1.59
-//      In the Euro-zone the Big-Mac price varies, but on average sell for 4.43 USD.
-    
-    func translateCost(sender: UIButton) {
-        let CURRENCY_MULTIPLIER = 1.59 // 1 USD = 1.59 Credits, see above
-        guard let costInCredits = self.resourceArray[self.currentItem].costInCredits, let senderTitle = sender.titleLabel?.text else {
-            return
-        }
-        let costInUSD = costInCredits / CURRENCY_MULTIPLIER
-        let creditsString = NSString(format: "%.2f", costInCredits)
-        let usdString = NSString(format: "$ %.2f", costInUSD)
-        
-        switch senderTitle {
-        case "Credits":
-            self.tableView.labelValues[1].text = creditsString as String
-            self.creditsButton.setTitleColor(.white, for: .normal)
-            self.usdButton.setTitleColor(AppColor.Dark.color, for: .normal)
-        case "USD":
-            self.tableView.labelValues[1].text = usdString as String
-            self.creditsButton.setTitleColor(AppColor.Dark.color, for: .normal)
-            self.usdButton.setTitleColor(.white, for: .normal)
-        default:
-            break
-        }
-    }
-    
-    func translateMeasure(sender: UIButton) {
-        guard let senderTitle = sender.titleLabel?.text else {
-            return
-        }
-        let cm = self.resourceArray[self.currentItem].measured
-        let yard = Int(cm / 91.44)
-        let feet = Int((cm - (Double(yard) * 91.44)) / 30.48)
-        let inches = Int((cm - (Double(yard) * 91.44) - (Double(feet) * 30.48)) / 2.54)
-        
-        let cmString = NSString(format: "%.0f", cm)
-        let mString = NSString(format: "%.0f", cm / 100)
-        var englishString: NSString
-        if yard > 0 {
-            englishString = NSString(format: "%d yd %d ft %d in", yard, feet, inches)
-        } else {
-            if feet > 0 {
-                englishString = NSString(format: "%d ft %d in", feet, inches)
-            } else {
-                englishString = NSString(format: "%d in", inches)
-            }
-        }
-        
-        switch senderTitle {
-        case "Metrics":
-            if self.unitType == .Character {
-                self.tableView.labelValues[2].text = cmString as String
-            } else {
-                self.tableView.labelValues[2].text = mString as String
-            }
-            self.metricsButton.setTitleColor(.white, for: .normal)
-            self.englishButton.setTitleColor(AppColor.Dark.color, for: .normal)
-        case "English":
-            self.tableView.labelValues[2].text = englishString as String
-            self.metricsButton.setTitleColor(AppColor.Dark.color, for: .normal)
-            self.englishButton.setTitleColor(.white, for: .normal)
-        default:
-            break
-        }
+        self.smallestLargest.smallestValueLabel.text = smallestName(array: self.resourceArray)
+        self.smallestLargest.largestValueLabel.text = largestName(array: self.resourceArray)
     }
 }

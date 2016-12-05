@@ -8,28 +8,35 @@
 
 import Foundation
 
-struct Character: Resource {
+struct Character: Resource, MeasureChangeable {
     let name: String
     let born: String
     var home: String {
         didSet {
-            self.labelValues = [born, home, height, eyes, hair]
+            self.labelValues = [self.born, self.home, self.height, self.eyes, self.hair]
         }
     }
     let height: String
     let eyes: String
     let hair: String
-    let labelNames: [String] = ["Born", "Home", "Height", "Eyes", "Hair"]
+    var labelNames: [String]
     var labelValues: [String]
     
-    var measured: Double {
+    init(name: String, born: String, home: String, height: String, eyes: String, hair: String){
+        self.name = name
+        self.born = born
+        self.home = home
+        self.height = height
+        self.eyes = eyes
+        self.hair = hair
+        self.labelNames = ["Born", "Home", "Height", "Eyes", "Hair"]
+        self.labelValues = [self.born, self.home, self.height, self.eyes, self.hair]
+    }
+    
+    var measured: Double? {
         if let measured = Double(height.replacingOccurrences(of: ",", with: "")) {
             return measured
         }
-        return 0
-    }
-    
-    var costInCredits: Double? {
         return nil
     }
 }
@@ -46,12 +53,6 @@ extension Character: JSONDecodable {
             else {
                 return nil
         }
-        self.name = name
-        self.born = born
-        self.home = home
-        self.height = height
-        self.eyes = eyes
-        self.hair = hair
-        self.labelValues = [born, home, height, eyes, hair]
-    }    
+        self.init(name: name, born: born, home: home, height: height, eyes: eyes, hair: hair)
+    }
 }

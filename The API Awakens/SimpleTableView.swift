@@ -17,6 +17,7 @@ class SimpleTableView: UIView {
     static let offsetX: CGFloat = 12
     
     init(headerTitle: String, labelNames: [String], labelValues: [String]) {
+        
         var height: CGFloat = 0
         let widthScreen = UIScreen.main.bounds.size.width
         let offsetFromHeader: CGFloat = 20

@@ -10,8 +10,7 @@ import Foundation
 
 protocol Resource {
     var name: String { get }
-    var measured: Double { get }
-    var costInCredits: Double? { get }
-    var labelNames: [String] { get }
+    var labelNames: [String] { get set }
     var labelValues: [String] { get set }
+    var measured: Double? { get }
 }

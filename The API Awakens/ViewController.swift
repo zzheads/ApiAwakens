@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = AppColor.Black.color
         navigationController?.navigationBar.barStyle = .blackOpaque
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
 
         for type in UnitType.allTypes {
             let button = UIButton()

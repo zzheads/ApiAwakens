@@ -16,12 +16,17 @@ protocol PlanetType {
 struct Planet: Resource, PlanetType {
     let name: String
     let url: String
-    let labelNames = ["Name"]
+    var labelNames: [String]
     var labelValues: [String]
-    var measured: Double {
-        return 0
+    
+    init(name: String, url: String) {
+        self.name = name
+        self.url = url
+        self.labelNames = ["Name", "URL"]
+        self.labelValues = [self.name, self.url]
     }
-    var costInCredits: Double? {
+    
+    var measured: Double? {
         return nil
     }
 }
@@ -34,9 +39,7 @@ extension Planet: JSONDecodable {
             else {
                 return nil
         }
-        self.name = name
-        self.url = url
-        self.labelValues = [name]
+        self.init(name: name, url: url)
     }
 }
 
