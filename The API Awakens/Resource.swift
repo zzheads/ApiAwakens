@@ -10,7 +10,8 @@ import Foundation
 
 protocol Resource {
     var name: String { get }
-    var labelNames: [String] { get set }
-    var labelValues: [String] { get set }
+    var labelNames: [String] { get }
     var measured: Double? { get }
+    
+    func values(currency: Currency, measure: Measure) -> [String]
 }

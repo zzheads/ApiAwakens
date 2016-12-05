@@ -17,6 +17,7 @@ protocol CurrencyChangeable {
     var cost: String { get }
     var costInCredits: Double? { get }
     var costInUSD: Double? { get }
+    func cost(inCurrency: Currency) -> String
 }
 
 extension CurrencyChangeable {
@@ -44,5 +45,20 @@ extension CurrencyChangeable {
             return nil
         }
         return costInCredits * 4.2 / 6.7
+    }
+    
+    func cost(inCurrency: Currency) -> String {
+        switch inCurrency {
+        case .Credits:
+            guard let cost = costInCredits else {
+                return "n/a"
+            }
+            return NSString(format: "%.0f creds", cost) as String
+        case .USD:
+            guard let cost = costInUSD else {
+                return "n/a"
+            }
+            return NSString(format: "$ %.0f", cost) as String
+        }
     }
 }

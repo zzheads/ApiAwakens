@@ -11,16 +11,14 @@ import Foundation
 struct Character: Resource, MeasureChangeable {
     let name: String
     let born: String
-    var home: String {
-        didSet {
-            self.labelValues = [self.born, self.home, self.height, self.eyes, self.hair]
-        }
-    }
+    var home: String
     let height: String
     let eyes: String
     let hair: String
-    var labelNames: [String]
-    var labelValues: [String]
+    
+    var labelNames: [String] {
+        return ["Born", "Home", "Height", "Eyes", "Hair"]
+    }
     
     init(name: String, born: String, home: String, height: String, eyes: String, hair: String){
         self.name = name
@@ -29,8 +27,6 @@ struct Character: Resource, MeasureChangeable {
         self.height = height
         self.eyes = eyes
         self.hair = hair
-        self.labelNames = ["Born", "Home", "Height", "Eyes", "Hair"]
-        self.labelValues = [self.born, self.home, self.height, self.eyes, self.hair]
     }
     
     var measured: Double? {
@@ -38,6 +34,10 @@ struct Character: Resource, MeasureChangeable {
             return measured
         }
         return nil
+    }
+
+    func values(currency: Currency, measure: Measure) -> [String] {
+        return [self.born, self.home, length(inUnits: measure), self.eyes, self.hair]
     }
 }
 

@@ -15,8 +15,12 @@ struct Starship: Resource, CurrencyChangeable, MeasureChangeable {
     let length: String
     let starshipClass: String
     let crew: String
-    var labelNames: [String]
-    var labelValues: [String]
+    var labelNames: [String] {
+        return ["Make", "Cost", "Length", "Class", "Crew"]
+    }
+    var labelValues: [String] {
+        return [self.make, self.cost, self.length, self.starshipClass, self.crew]
+    }
     
     init(name: String, make: String, cost: String, length: String, starshipClass: String, crew: String){
         self.name = name
@@ -25,8 +29,6 @@ struct Starship: Resource, CurrencyChangeable, MeasureChangeable {
         self.length = length
         self.starshipClass = starshipClass
         self.crew = crew
-        self.labelNames = ["Make", "Cost", "Length", "Class", "Crew"]
-        self.labelValues = [self.make, self.cost, self.length, self.starshipClass, self.crew]
     }
     
     var measured: Double? {
@@ -34,7 +36,11 @@ struct Starship: Resource, CurrencyChangeable, MeasureChangeable {
             return measured * 100
         }
         return nil
-    }    
+    }
+    
+    func values(currency: Currency, measure: Measure) -> [String] {
+        return [self.make, cost(inCurrency: currency), length(inUnits: measure), self.starshipClass, self.crew]
+    }
 }
 
 extension Starship: JSONDecodable {

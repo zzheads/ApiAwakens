@@ -17,6 +17,7 @@ protocol MeasureChangeable {
     var measured: Double? { get }
     var lengthInCm: Double? { get }
     var lengthInInches: Double? { get }
+    func length(inUnits: Measure) -> String
 }
 
 extension MeasureChangeable {
@@ -39,12 +40,6 @@ extension MeasureChangeable {
         }
         return heightInCm * 0.393701
     }
-    var lengthInYards: Double? {
-        guard let lengthInInches = self.lengthInInches else {
-            return nil
-        }
-        return lengthInInches / 36
-    }
     var lengthInFeet: Double? {
         guard let lengthInInches = self.lengthInInches else {
             return nil
@@ -55,29 +50,25 @@ extension MeasureChangeable {
     func length(inUnits: Measure) -> String {
         switch inUnits {
         case .English:
-            guard let lengthInInches = self.lengthInInches, let lengthInYards = self.lengthInYards, let lengthInFeet = self.lengthInFeet else {
+            guard let lengthInInches = self.lengthInInches, let lengthInFeet = self.lengthInFeet else {
                 return "n/a"
             }
-            if lengthInYards > 0 {
-                let nsString = NSString(format: "%d yd", Int(lengthInYards))
-                return nsString as String
-            }
-            if lengthInFeet > 0 {
+            if lengthInFeet > 1 {
                 let nsString = NSString(format: "%d ft %d in", Int(lengthInFeet), Int(lengthInInches) - Int(lengthInFeet) * 12)
                 return nsString as String
             } else {
-                let nsString = NSString(format: "%d in", lengthInInches)
+                let nsString = NSString(format: "%.0f in", lengthInInches)
                 return nsString as String
             }
         case .Metrics:
             guard let lengthInCm = self.lengthInCm, let lengthInMeters = self.lengthInMeters else {
                 return "n/a"
             }
-            if lengthInMeters > 2 {
-                let nsString = NSString(format: "%d m", lengthInMeters)
+            if lengthInMeters > 1 {
+                let nsString = NSString(format: "%d m %d cm", Int(lengthInMeters), Int(lengthInCm) - Int(lengthInMeters) * 100)
                 return nsString as String
             }
-            let nsString = NSString(format: "%d cm", lengthInCm)
+            let nsString = NSString(format: "%.0f cm", lengthInCm)
             return nsString as String
         }
     }

@@ -16,18 +16,21 @@ protocol PlanetType {
 struct Planet: Resource, PlanetType {
     let name: String
     let url: String
-    var labelNames: [String]
-    var labelValues: [String]
+    var labelNames: [String] {
+        return ["Name", "URL"]
+    }
     
     init(name: String, url: String) {
         self.name = name
         self.url = url
-        self.labelNames = ["Name", "URL"]
-        self.labelValues = [self.name, self.url]
     }
     
     var measured: Double? {
         return nil
+    }
+    
+    func values(currency: Currency, measure: Measure) -> [String] {
+        return [self.name, self.url]
     }
 }
 

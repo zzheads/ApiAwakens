@@ -13,6 +13,7 @@ class UnitViewController: UIViewController {
     
     var currentCurrency: Currency = .Credits {
         didSet {
+            currentItem += 0
             switch self.currentCurrency {
             case .Credits:
                 creditsButton.setTitleColor(.white, for: .normal)
@@ -26,6 +27,7 @@ class UnitViewController: UIViewController {
     
     var currentLength: Measure = .Metrics {
         didSet {
+            currentItem += 0
             switch self.currentLength {
             case .Metrics:
                 metricsButton.setTitleColor(.white, for: .normal)
@@ -43,7 +45,7 @@ class UnitViewController: UIViewController {
                 tableView.header.text = resourceArray[currentItem].name
                 for i in 0..<resourceArray[currentItem].labelNames.count {
                     tableView.labelNames[i].text = resourceArray[currentItem].labelNames[i]
-                    tableView.labelValues[i].text = resourceArray[currentItem].labelValues[i]
+                    tableView.labelValues[i].text = resourceArray[currentItem].values(currency: currentCurrency, measure: currentLength)[i]
                 }
             }
         }
@@ -211,6 +213,8 @@ class UnitViewController: UIViewController {
                         }
                         self.resourceArray.append(character)
                     }
+                    self.creditsButton.isHidden = true
+                    self.usdButton.isHidden = true
                     self.calcSmallestLargest()
                     self.currentItem = 0
                     self.pickerView.reloadAllComponents()
@@ -223,6 +227,8 @@ class UnitViewController: UIViewController {
                 for vehicle in vehicles {
                     self.resourceArray.append(vehicle)
                 }
+                self.creditsButton.isHidden = false
+                self.usdButton.isHidden = false
                 self.calcSmallestLargest()
                 self.currentItem = 0
                 self.pickerView.reloadAllComponents()
@@ -234,6 +240,8 @@ class UnitViewController: UIViewController {
                 for starship in starships {
                     self.resourceArray.append(starship)
                 }
+                self.creditsButton.isHidden = false
+                self.usdButton.isHidden = false
                 self.calcSmallestLargest()
                 self.currentItem = 0
                 self.pickerView.reloadAllComponents()
