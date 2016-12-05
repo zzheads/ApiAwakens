@@ -69,12 +69,7 @@ class UnitViewController: UIViewController {
         return pickerView
     }()
     
-    lazy var tableView: SimpleTableView = {
-        let tableView = SimpleTableView(headerTitle: "Loading...", labelNames: [" "," "," "," "," "], labelValues: [" "," "," "," "," "])
-
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
+    let tableView: SimpleTableView
 
     lazy var smallestLargest: SmallestLargestView = {
         let smallestLargest = SmallestLargestView()
@@ -130,6 +125,11 @@ class UnitViewController: UIViewController {
     
     init(unitType: UnitType) {
         self.unitType = unitType
+        switch unitType {
+        case .Character: self.tableView = SimpleTableView(headerTitle: "", labelNames: [" "," "," "," "," "," "], labelValues: [" "," "," "," "," "," "])
+        case .Starship, .Vehicle: self.tableView = SimpleTableView(headerTitle: "", labelNames: [" "," "," "," "," "], labelValues: [" "," "," "," "," "])
+        }
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -203,22 +203,55 @@ class UnitViewController: UIViewController {
             ResourcePage.fetchArray(resourceClass: Character.self) { characters in
                 self.tableView.header.text = "Loading Planets..."
                 ResourcePage.fetchArray(resourceClass: Planet.self) { planets in
-                    for i in 0..<characters.count {
-                        var character = characters[i]
-                        let url = character.home
-                        if let home = planets.findNameByUrl(url: url) {
-                            character.home = home
-                        } else {
-                            character.home = "Unknown planet (\(url))"
+                    self.tableView.header.text = "Loading Vehicles..."
+                    ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
+                        self.tableView.header.text = "Loading Starships..."
+                        ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
+                            for i in 0..<characters.count {
+                                var character = characters[i]
+                                let urlPlanet = character.home
+                                if let home = planets.findNameByUrl(url: urlPlanet) {
+                                    character.home = home
+                                } else {
+                                    character.home = "Unknown planet (\(urlPlanet))"
+                                }
+                                
+                                if let characterVehicles = character.vehicles {
+                                    var vehicleNames: [String] = []
+                                    for urlVehicle in characterVehicles {
+                                        if let vehicleName = vehicles.findNameByUrl(url: urlVehicle) {
+                                            vehicleNames.append(vehicleName)
+                                        } else {
+                                            vehicleNames.append("Unknown vehicle (\(urlVehicle))")
+                                        }
+                                    }
+                                    character.vehicles = vehicleNames
+                                }
+                                
+                                if let characterStarships = character.starships {
+                                    var starshipNames: [String] = []
+                                    for urlStarship in characterStarships {
+                                        if let starshipName = starships.findNameByUrl(url: urlStarship) {
+                                            starshipNames.append(starshipName)
+                                        } else {
+                                            starshipNames.append("Unknown starship (\(urlStarship))")
+                                        }
+                                    }
+                                    character.starships = starshipNames
+                                }
+                                
+                                self.resourceArray.append(character)
+                            }
+                            
+                            
+                            self.creditsButton.isHidden = true
+                            self.usdButton.isHidden = true
+                            self.calcSmallestLargest()
+                            self.currentItem = 0
+                            self.pickerView.reloadAllComponents()
+                            self.activity.stopAnimating()
                         }
-                        self.resourceArray.append(character)
                     }
-                    self.creditsButton.isHidden = true
-                    self.usdButton.isHidden = true
-                    self.calcSmallestLargest()
-                    self.currentItem = 0
-                    self.pickerView.reloadAllComponents()
-                    self.activity.stopAnimating()
                 }
             }
         case .Vehicle:

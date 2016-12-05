@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable {
+struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
     let name: String
     let make: String
     let cost: String
     let length: String
     let vehicleClass: String
     let crew: String
+    let url: String
     var labelNames: [String] {
         return ["Make", "Cost", "Length", "Class", "Crew"]
     }
@@ -22,13 +23,14 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable {
         return [self.make, self.cost, self.length, self.vehicleClass, self.crew]
     }
     
-    init(name: String, make: String, cost: String, length: String, vehicleClass: String, crew: String){
+    init(name: String, make: String, cost: String, length: String, vehicleClass: String, crew: String, url: String){
         self.name = name
         self.make = make
         self.cost = cost
         self.length = length
         self.vehicleClass = vehicleClass
         self.crew = crew
+        self.url = url
     }
     
     var measured: Double? {
@@ -51,10 +53,11 @@ extension Vehicle: JSONDecodable {
             let cost = JSON["cost_in_credits"] as? String,
             let length = JSON["length"] as? String,
             let vehicleClass = JSON["vehicle_class"] as? String,
-            let crew = JSON["crew"] as? String
+            let crew = JSON["crew"] as? String,
+            let url = JSON["url"] as? String
             else {
                 return nil
         }
-        self.init(name: name, make: make, cost: cost, length: length, vehicleClass: vehicleClass, crew: crew)
+        self.init(name: name, make: make, cost: cost, length: length, vehicleClass: vehicleClass, crew: crew, url: url)
     }
 }

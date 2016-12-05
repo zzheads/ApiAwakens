@@ -8,12 +8,7 @@
 
 import Foundation
 
-protocol PlanetType {
-    var url: String { get }
-    var name: String { get }
-}
-
-struct Planet: Resource, PlanetType {
+struct Planet: Resource, URLType {
     let name: String
     let url: String
     var labelNames: [String] {
@@ -43,16 +38,5 @@ extension Planet: JSONDecodable {
                 return nil
         }
         self.init(name: name, url: url)
-    }
-}
-
-extension Array where Element: PlanetType {
-    func findNameByUrl(url: String) -> String? {
-        for planet in self {
-            if planet.url == url {
-                return planet.name
-            }
-        }
-        return nil
     }
 }

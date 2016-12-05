@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct Starship: Resource, CurrencyChangeable, MeasureChangeable {
+struct Starship: Resource, CurrencyChangeable, MeasureChangeable, URLType {
     let name: String
     let make: String
     let cost: String
     let length: String
     let starshipClass: String
     let crew: String
+    let url: String
     var labelNames: [String] {
         return ["Make", "Cost", "Length", "Class", "Crew"]
     }
@@ -22,13 +23,14 @@ struct Starship: Resource, CurrencyChangeable, MeasureChangeable {
         return [self.make, self.cost, self.length, self.starshipClass, self.crew]
     }
     
-    init(name: String, make: String, cost: String, length: String, starshipClass: String, crew: String){
+    init(name: String, make: String, cost: String, length: String, starshipClass: String, crew: String, url: String){
         self.name = name
         self.make = make
         self.cost = cost
         self.length = length
         self.starshipClass = starshipClass
         self.crew = crew
+        self.url = url
     }
     
     var measured: Double? {
@@ -51,10 +53,11 @@ extension Starship: JSONDecodable {
             let cost = JSON["cost_in_credits"] as? String,
             let length = JSON["length"] as? String,
             let starshipClass = JSON["starship_class"] as? String,
-            let crew = JSON["crew"] as? String
+            let crew = JSON["crew"] as? String,
+            let url = JSON["url"] as? String
             else {
                 return nil
         }
-        self.init(name: name, make: make, cost: cost, length: length, starshipClass: starshipClass, crew: crew)
+        self.init(name: name, make: make, cost: cost, length: length, starshipClass: starshipClass, crew: crew, url: url)
     }
 }
