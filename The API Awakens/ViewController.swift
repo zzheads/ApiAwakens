@@ -26,7 +26,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        playSound()
         self.view.backgroundColor = AppColor.Black.color
         navigationController?.navigationBar.barStyle = .blackOpaque
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
@@ -61,6 +60,9 @@ class ViewController: UIViewController {
         }
         let unitViewController = UnitViewController(unitType: unitType)
         self.navigationController?.pushViewController(unitViewController, animated: true)
+        if let player = self.player {
+            player.stop()
+        }
     }
 }
 

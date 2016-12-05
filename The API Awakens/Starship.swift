@@ -58,7 +58,7 @@ struct Starship: Resource, CurrencyChangeable, MeasureChangeable, URLType {
     }
     
     func values(currency: Currency, measure: Measure) -> [String] {
-        return [self.make, cost(inCurrency: currency), length(inUnits: measure), self.starshipClass, self.crew, self.pilotNames]
+        return [self.make.capitalized, cost(inCurrency: currency), length(inUnits: measure), self.starshipClass.capitalized, self.crew.capitalized, self.pilotNames]
     }
 }
 

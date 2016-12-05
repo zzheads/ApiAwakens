@@ -74,7 +74,7 @@ struct Character: Resource, MeasureChangeable, URLType {
     }
 
     func values(currency: Currency, measure: Measure) -> [String] {
-        return [self.born, self.home, length(inUnits: measure), self.eyes, self.hair, self.driveVehicles, self.driveShips]
+        return [self.born.capitalized, self.home.capitalized, length(inUnits: measure), self.eyes.capitalized, self.hair.capitalized, self.driveVehicles, self.driveShips]
     }
 }
 

@@ -60,6 +60,15 @@ class UnitViewController: UIViewController {
         return activity
     }()
     
+    lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = AppColor.Blue.color
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.isHidden = true
+        return label
+    }()
+    
     lazy var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
@@ -145,10 +154,16 @@ class UnitViewController: UIViewController {
         self.navigationItem.title = "\(self.unitType.rawValue)s"
         self.navigationController?.navigationBar.tintColor = AppColor.Silver.color
         
+        self.view.addSubview(statusLabel)
+        NSLayoutConstraint.activate([
+            statusLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            statusLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height / 4)
+            ])
+        
         self.view.addSubview(activity)
         NSLayoutConstraint.activate([
             activity.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            activity.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height / 4)
+            activity.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: activity.bounds.size.height)
             ])
         activity.startAnimating()
 
@@ -200,19 +215,20 @@ class UnitViewController: UIViewController {
 
         switch self.unitType {
         case .Character:
-            self.tableView.header.text = "Loading Characters..."
+            hideAll()
+            self.statusLabel.text = "Loading Characters..."
             ResourcePage.fetchArray(resourceClass: Character.self) { characters in
-                self.tableView.header.text = "Loading Planets..."
+                self.statusLabel.text = "Loading Planets..."
                 ResourcePage.fetchArray(resourceClass: Planet.self) { planets in
-                    self.tableView.header.text = "Loading Vehicles..."
+                    self.statusLabel.text = "Loading Vehicles..."
                     ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
-                        self.tableView.header.text = "Loading Starships..."
+                        self.statusLabel.text = "Loading Starships..."
                         ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
                             for i in 0..<characters.count {
                                 var character = characters[i]
                                 let urlPlanet = character.home
                                 if let home = planets.findNameByUrl(url: urlPlanet) {
-                                    character.home = home
+                                    character.home = home.capitalized
                                 } else {
                                     character.home = "Unknown planet (\(urlPlanet))"
                                 }
@@ -221,7 +237,7 @@ class UnitViewController: UIViewController {
                                     var vehicleNames: [String] = []
                                     for urlVehicle in characterVehicles {
                                         if let vehicleName = vehicles.findNameByUrl(url: urlVehicle) {
-                                            vehicleNames.append(vehicleName)
+                                            vehicleNames.append(vehicleName.capitalized)
                                         } else {
                                             vehicleNames.append("Unknown vehicle (\(urlVehicle))")
                                         }
@@ -233,7 +249,7 @@ class UnitViewController: UIViewController {
                                     var starshipNames: [String] = []
                                     for urlStarship in characterStarships {
                                         if let starshipName = starships.findNameByUrl(url: urlStarship) {
-                                            starshipNames.append(starshipName)
+                                            starshipNames.append(starshipName.capitalized)
                                         } else {
                                             starshipNames.append("Unknown starship (\(urlStarship))")
                                         }
@@ -243,10 +259,7 @@ class UnitViewController: UIViewController {
                                 
                                 self.resourceArray.append(character)
                             }
-                            
-                            
-                            self.creditsButton.isHidden = true
-                            self.usdButton.isHidden = true
+                            self.showAll()
                             self.calcSmallestLargest()
                             self.currentItem = 0
                             self.pickerView.reloadAllComponents()
@@ -256,9 +269,10 @@ class UnitViewController: UIViewController {
                 }
             }
         case .Vehicle:
-            self.tableView.header.text = "Loading Vehicles..."
+            hideAll()
+            self.statusLabel.text = "Loading Vehicles..."
             ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
-                self.tableView.header.text = "Loading Characters..."
+                self.statusLabel.text = "Loading Characters..."
                 ResourcePage.fetchArray(resourceClass: Character.self) { characters in
                     for vehicle in vehicles {
                         var veh = vehicle
@@ -266,7 +280,7 @@ class UnitViewController: UIViewController {
                         if let pilots = vehicle.pilots {
                             for pilot in pilots {
                                 if let pilotName = characters.findNameByUrl(url: pilot) {
-                                    pilotNames.append(pilotName)
+                                    pilotNames.append(pilotName.capitalized)
                                 } else {
                                     pilotNames.append("Unknown character (\(pilot))")
                                 }
@@ -275,8 +289,7 @@ class UnitViewController: UIViewController {
                         }
                         self.resourceArray.append(veh)
                     }
-                    self.creditsButton.isHidden = false
-                    self.usdButton.isHidden = false
+                    self.showAll()
                     self.calcSmallestLargest()
                     self.currentItem = 0
                     self.pickerView.reloadAllComponents()
@@ -284,9 +297,10 @@ class UnitViewController: UIViewController {
                 }
             }
         case .Starship:
-            self.tableView.header.text = "Loading Starships..."
+            hideAll()
+            self.statusLabel.text = "Loading Starships..."
             ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
-                self.tableView.header.text = "Loading Characters..."
+                self.statusLabel.text = "Loading Characters..."
                 ResourcePage.fetchArray(resourceClass: Character.self) { characters in
                     for starship in starships {
                         var ship = starship
@@ -294,7 +308,7 @@ class UnitViewController: UIViewController {
                         if let pilots = starship.pilots {
                             for pilot in pilots {
                                 if let pilotName = characters.findNameByUrl(url: pilot) {
-                                    pilotNames.append(pilotName)
+                                    pilotNames.append(pilotName.capitalized)
                                 } else {
                                     pilotNames.append("Unknown character (\(pilot))")
                                 }
@@ -304,8 +318,7 @@ class UnitViewController: UIViewController {
                         self.resourceArray.append(ship)
                 
                     }
-                    self.creditsButton.isHidden = false
-                    self.usdButton.isHidden = false
+                    self.showAll()
                     self.calcSmallestLargest()
                     self.currentItem = 0
                     self.pickerView.reloadAllComponents()
@@ -381,6 +394,29 @@ extension UnitViewController {
 
 
 //MARK: - Helpers
+extension UnitViewController {
+    func hideAll() {
+        self.tableView.isHidden = true
+        self.pickerView.isHidden = true
+        self.usdButton.isHidden = true
+        self.creditsButton.isHidden = true
+        self.metricsButton.isHidden = true
+        self.englishButton.isHidden = true
+        self.statusLabel.isHidden = false
+    }
+    
+    func showAll() {
+        self.tableView.isHidden = false
+        self.pickerView.isHidden = false
+        if (self.unitType != .Character) {
+            self.usdButton.isHidden = false
+            self.creditsButton.isHidden = false
+        }
+        self.metricsButton.isHidden = false
+        self.englishButton.isHidden = false
+        self.statusLabel.isHidden = true
+    }
+}
 
 extension UnitViewController {
     func smallestName(array: [Resource]) -> String {

@@ -22,6 +22,7 @@
 		A614BD371DF57C670010A913 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A614BD361DF57C670010A913 /* LaunchScreen.storyboard */; };
 		A614BD391DF57C990010A913 /* ImperialMarch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A614BD381DF57C990010A913 /* ImperialMarch.mp3 */; };
 		A614BD3B1DF57D8E0010A913 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A614BD3A1DF57D8E0010A913 /* Sound.swift */; };
+		A63A45AA1DF5898A004DF4E7 /* FastFact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63A45A91DF5898A004DF4E7 /* FastFact.swift */; };
 		A64111441DF05FB700D9DE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111431DF05FB700D9DE57 /* AppDelegate.swift */; };
 		A64111461DF05FB700D9DE57 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64111451DF05FB700D9DE57 /* ViewController.swift */; };
 		A641114B1DF05FB700D9DE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A641114A1DF05FB700D9DE57 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		A614BD361DF57C670010A913 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A614BD381DF57C990010A913 /* ImperialMarch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ImperialMarch.mp3; sourceTree = "<group>"; };
 		A614BD3A1DF57D8E0010A913 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		A63A45A91DF5898A004DF4E7 /* FastFact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FastFact.swift; sourceTree = "<group>"; };
 		A64111401DF05FB700D9DE57 /* The API Awakens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The API Awakens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64111431DF05FB700D9DE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A64111451DF05FB700D9DE57 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "The API Awakens/ViewController.swift"; sourceTree = "<group>"; };
@@ -135,6 +137,14 @@
 				A614BCFC1DF56BEB0010A913 /* StarshipKeys.swift */,
 			);
 			name = Keys;
+			sourceTree = "<group>";
+		};
+		A63A45A81DF58976004DF4E7 /* FastFact */ = {
+			isa = PBXGroup;
+			children = (
+				A63A45A91DF5898A004DF4E7 /* FastFact.swift */,
+			);
+			name = FastFact;
 			sourceTree = "<group>";
 		};
 		A64111371DF05FB700D9DE57 = {
@@ -251,6 +261,7 @@
 		A641118F1DF094E200D9DE57 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A63A45A81DF58976004DF4E7 /* FastFact */,
 				A614BCF71DF56B940010A913 /* Keys */,
 				A614BCE91DF2E68B0010A913 /* Resource.swift */,
 				A614BCF11DF4E38A0010A913 /* Currency.swift */,
@@ -388,6 +399,7 @@
 				A614BD3B1DF57D8E0010A913 /* Sound.swift in Sources */,
 				A64111971DF12F3600D9DE57 /* APIClient.swift in Sources */,
 				A64111AB1DF28DD000D9DE57 /* ResourcePage.swift in Sources */,
+				A63A45AA1DF5898A004DF4E7 /* FastFact.swift in Sources */,
 				A614BCFD1DF56BEB0010A913 /* StarshipKeys.swift in Sources */,
 				A614BCFB1DF56BCF0010A913 /* CharacterKeys.swift in Sources */,
 				A64111911DF094EF00D9DE57 /* UnitType.swift in Sources */,

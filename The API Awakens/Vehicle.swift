@@ -58,7 +58,7 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
     }
     
     func values(currency: Currency, measure: Measure) -> [String] {
-        return [self.make, cost(inCurrency: currency), length(inUnits: measure), self.vehicleClass, self.crew, self.pilotNames]
+        return [self.make.capitalized, cost(inCurrency: currency), length(inUnits: measure), self.vehicleClass.capitalized, self.crew.capitalized, self.pilotNames]
     }
 }
 
