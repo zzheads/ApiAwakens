@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     static let widthScreen = UIScreen.main.bounds.size.width
     static let heightScreen = UIScreen.main.bounds.size.height
+
+    var player: AVAudioPlayer?
     
     lazy var buttons: [UnitType: UIButton] = [:]
 
@@ -23,6 +26,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        playSound()
         self.view.backgroundColor = AppColor.Black.color
         navigationController?.navigationBar.barStyle = .blackOpaque
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
@@ -57,10 +61,22 @@ class ViewController: UIViewController {
         }
         let unitViewController = UnitViewController(unitType: unitType)
         self.navigationController?.pushViewController(unitViewController, animated: true)
-//        let navigationController = UINavigationController(rootViewController: unitViewController)
-//        self.present(navigationController, animated: true, completion: nil)
     }
 }
 
-
+extension ViewController {
+    func playSound() {
+        let url = Bundle.main.url(forResource: "ImperialMarch", withExtension: "mp3")!
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.prepareToPlay()
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
 

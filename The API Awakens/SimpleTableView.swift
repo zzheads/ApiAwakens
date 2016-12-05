@@ -40,7 +40,7 @@ class SimpleTableView: UIView {
 
         for value in labelValues {
             let valueLabel = UILabel()
-            valueLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            valueLabel.font = UIFont.systemFont(ofSize: 15)
             valueLabel.textColor = AppColor.Silver.color
             valueLabel.text = value
             self.labelValues.append(valueLabel)

@@ -64,7 +64,7 @@ class UnitViewController: UIViewController {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
-        pickerView.backgroundColor = .white
+        pickerView.backgroundColor = AppColor.Dark.color
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         return pickerView
     }()
@@ -126,8 +126,9 @@ class UnitViewController: UIViewController {
     init(unitType: UnitType) {
         self.unitType = unitType
         switch unitType {
-        case .Character: self.tableView = SimpleTableView(headerTitle: "", labelNames: [" "," "," "," "," "," "], labelValues: [" "," "," "," "," "," "])
-        case .Starship, .Vehicle: self.tableView = SimpleTableView(headerTitle: "", labelNames: [" "," "," "," "," "], labelValues: [" "," "," "," "," "])
+        case .Character: self.tableView = SimpleTableView(headerTitle: "", labelNames: CharacterKeys.emptyFields, labelValues: CharacterKeys.emptyFields)
+        case .Starship: self.tableView = SimpleTableView(headerTitle: "", labelNames: StarshipKeys.emptyFields, labelValues: StarshipKeys.emptyFields)
+        case .Vehicle: self.tableView = SimpleTableView(headerTitle: "", labelNames: VehicleKeys.emptyFields, labelValues: VehicleKeys.emptyFields)
         }
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         super.init(nibName: nil, bundle: nil)
@@ -155,7 +156,7 @@ class UnitViewController: UIViewController {
         NSLayoutConstraint.activate([
             pickerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             pickerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            pickerView.topAnchor.constraint(equalTo: self.view.centerYAnchor),
+            pickerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 2 / 3),
             pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -SmallestLargestView.height)
             ])
         
@@ -257,32 +258,62 @@ class UnitViewController: UIViewController {
         case .Vehicle:
             self.tableView.header.text = "Loading Vehicles..."
             ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
-                for vehicle in vehicles {
-                    self.resourceArray.append(vehicle)
+                self.tableView.header.text = "Loading Characters..."
+                ResourcePage.fetchArray(resourceClass: Character.self) { characters in
+                    for vehicle in vehicles {
+                        var veh = vehicle
+                        var pilotNames: [String] = []
+                        if let pilots = vehicle.pilots {
+                            for pilot in pilots {
+                                if let pilotName = characters.findNameByUrl(url: pilot) {
+                                    pilotNames.append(pilotName)
+                                } else {
+                                    pilotNames.append("Unknown character (\(pilot))")
+                                }
+                            }
+                            veh.pilots = pilotNames
+                        }
+                        self.resourceArray.append(veh)
+                    }
+                    self.creditsButton.isHidden = false
+                    self.usdButton.isHidden = false
+                    self.calcSmallestLargest()
+                    self.currentItem = 0
+                    self.pickerView.reloadAllComponents()
+                    self.activity.stopAnimating()
                 }
-                self.creditsButton.isHidden = false
-                self.usdButton.isHidden = false
-                self.calcSmallestLargest()
-                self.currentItem = 0
-                self.pickerView.reloadAllComponents()
-                self.activity.stopAnimating()
             }
         case .Starship:
             self.tableView.header.text = "Loading Starships..."
             ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
-                for starship in starships {
-                    self.resourceArray.append(starship)
+                self.tableView.header.text = "Loading Characters..."
+                ResourcePage.fetchArray(resourceClass: Character.self) { characters in
+                    for starship in starships {
+                        var ship = starship
+                        var pilotNames: [String] = []
+                        if let pilots = starship.pilots {
+                            for pilot in pilots {
+                                if let pilotName = characters.findNameByUrl(url: pilot) {
+                                    pilotNames.append(pilotName)
+                                } else {
+                                    pilotNames.append("Unknown character (\(pilot))")
+                                }
+                            }
+                            ship.pilots = pilotNames
+                        }
+                        self.resourceArray.append(ship)
+                
+                    }
+                    self.creditsButton.isHidden = false
+                    self.usdButton.isHidden = false
+                    self.calcSmallestLargest()
+                    self.currentItem = 0
+                    self.pickerView.reloadAllComponents()
+                    self.activity.stopAnimating()
                 }
-                self.creditsButton.isHidden = false
-                self.usdButton.isHidden = false
-                self.calcSmallestLargest()
-                self.currentItem = 0
-                self.pickerView.reloadAllComponents()
-                self.activity.stopAnimating()
             }
         }
-        
-        
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -303,6 +334,18 @@ extension UnitViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return resourceArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.textColor = AppColor.Blue.color
+        label.backgroundColor = .clear
+        label.textAlignment = NSTextAlignment.center
+        if (!resourceArray.isEmpty) {
+            label.text = self.resourceArray[row].name
+        }
+        return label
     }
     
     //MARK: - PickerView Delegates

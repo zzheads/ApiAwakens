@@ -16,14 +16,15 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
     let vehicleClass: String
     let crew: String
     let url: String
+    var pilots: [String]?
     var labelNames: [String] {
-        return ["Make", "Cost", "Length", "Class", "Crew"]
+        return VehicleKeys.labelNames
     }
     var labelValues: [String] {
         return [self.make, self.cost, self.length, self.vehicleClass, self.crew]
     }
     
-    init(name: String, make: String, cost: String, length: String, vehicleClass: String, crew: String, url: String){
+    init(name: String, make: String, cost: String, length: String, vehicleClass: String, crew: String, url: String, pilots: [String]?){
         self.name = name
         self.make = make
         self.cost = cost
@@ -31,6 +32,7 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
         self.vehicleClass = vehicleClass
         self.crew = crew
         self.url = url
+        self.pilots = pilots
     }
     
     var measured: Double? {
@@ -40,24 +42,40 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
         return nil
     }
     
+    var pilotNames: String {
+        var pilotNames = ""
+        if let pilots = self.pilots {
+            for pilot in pilots {
+                pilotNames += "\(pilot), "
+            }
+        }
+        if pilotNames.characters.count > 2 {
+            // get rid of last 2 chars (", ")
+            let truncated = String(pilotNames.characters.dropLast().dropLast())
+            return truncated
+        }
+        return pilotNames
+    }
+    
     func values(currency: Currency, measure: Measure) -> [String] {
-        return [self.make, cost(inCurrency: currency), length(inUnits: measure), self.vehicleClass, self.crew]
+        return [self.make, cost(inCurrency: currency), length(inUnits: measure), self.vehicleClass, self.crew, self.pilotNames]
     }
 }
 
 extension Vehicle: JSONDecodable {
     init?(JSON: JSON) {
         guard
-            let name = JSON["name"] as? String,
-            let make = JSON["manufacturer"] as? String,
-            let cost = JSON["cost_in_credits"] as? String,
-            let length = JSON["length"] as? String,
-            let vehicleClass = JSON["vehicle_class"] as? String,
-            let crew = JSON["crew"] as? String,
-            let url = JSON["url"] as? String
+            let name = JSON[VehicleKeys.name.rawValue] as? String,
+            let make = JSON[VehicleKeys.manufacturer.rawValue] as? String,
+            let cost = JSON[VehicleKeys.cost_in_credits.rawValue] as? String,
+            let length = JSON[VehicleKeys.length.rawValue] as? String,
+            let vehicleClass = JSON[VehicleKeys.vehicle_class.rawValue] as? String,
+            let crew = JSON[VehicleKeys.crew.rawValue] as? String,
+            let url = JSON[VehicleKeys.url.rawValue] as? String
             else {
                 return nil
         }
-        self.init(name: name, make: make, cost: cost, length: length, vehicleClass: vehicleClass, crew: crew, url: url)
+        let pilots = JSON[VehicleKeys.pilots.rawValue] as? [String]
+        self.init(name: name, make: make, cost: cost, length: length, vehicleClass: vehicleClass, crew: crew, url: url, pilots: pilots)
     }
 }
