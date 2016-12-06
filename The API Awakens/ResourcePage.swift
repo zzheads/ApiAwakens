@@ -37,9 +37,10 @@ extension ResourcePage: JSONDecodable {
         var pageNumber = 1
         var resultArray: [T] = []
         
-        func recursive(completion: @escaping ([T]) -> Void) {
+        func listPage(completion: @escaping ([T]) -> Void) {
             
             var resourceType: ResourceType = .films("")
+            
             if resourceClass == Character.self {
                 resourceType = ResourceType.people("?page=\(pageNumber)")
             }
@@ -64,8 +65,7 @@ extension ResourcePage: JSONDecodable {
                     }
                     if resourcePage.next != nil {
                         pageNumber += 1
-                        //print(pageNumber)
-                        recursive(completion: completion)
+                        listPage(completion: completion)
                     } else {
                         completion(resultArray)
                         return
@@ -75,7 +75,7 @@ extension ResourcePage: JSONDecodable {
             }
         }
         
-        recursive(completion: completion)
+        listPage(completion: completion)
     }
 }
 

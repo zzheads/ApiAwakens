@@ -19,6 +19,10 @@ struct Character: Resource, MeasureChangeable, URLType {
     var vehicles: [String]?
     var starships: [String]?
     
+    var costInCredits: Double? {
+        return nil
+    }
+    
     var labelNames: [String] {
         return CharacterKeys.labelNames
     }

@@ -41,7 +41,7 @@ struct Vehicle: Resource, CurrencyChangeable, MeasureChangeable, URLType {
         }
         return nil
     }
-    
+        
     var pilotNames: String {
         var pilotNames = ""
         if let pilots = self.pilots {

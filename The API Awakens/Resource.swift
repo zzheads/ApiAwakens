@@ -12,6 +12,7 @@ protocol Resource {
     var name: String { get }
     var labelNames: [String] { get }
     var measured: Double? { get }
+    var costInCredits: Double? { get }
     
     func values(currency: Currency, measure: Measure) -> [String]
 }

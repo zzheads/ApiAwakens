@@ -24,6 +24,10 @@ struct Planet: Resource, URLType {
         return nil
     }
     
+    var costInCredits: Double? {
+        return nil
+    }
+    
     func values(currency: Currency, measure: Measure) -> [String] {
         return [self.name, self.url]
     }

@@ -80,10 +80,10 @@ class UnitViewController: UIViewController {
     
     let tableView: SimpleTableView
 
-    lazy var smallestLargest: SmallestLargestView = {
-        let smallestLargest = SmallestLargestView()
-        smallestLargest.translatesAutoresizingMaskIntoConstraints = false
-        return smallestLargest
+    lazy var quickFactsBar: QuickFactsBar = {
+        let quickFactsBar = QuickFactsBar(resource: self.resourceArray)
+        quickFactsBar.translatesAutoresizingMaskIntoConstraints = false
+        return quickFactsBar
     }()
     
     lazy var usdButton: UIButton = {
@@ -172,7 +172,7 @@ class UnitViewController: UIViewController {
             pickerView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             pickerView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
             pickerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: UIScreen.main.bounds.size.height * 2 / 3),
-            pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -SmallestLargestView.height)
+            pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -QuickFactsBar.height)
             ])
         
         self.view.addSubview(tableView)
@@ -181,12 +181,12 @@ class UnitViewController: UIViewController {
             tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             ])
         
-        self.view.addSubview(smallestLargest)
+        self.view.addSubview(quickFactsBar)
         NSLayoutConstraint.activate([
-            smallestLargest.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -SmallestLargestView.height),
-            smallestLargest.heightAnchor.constraint(equalToConstant: SmallestLargestView.height),
-            smallestLargest.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            smallestLargest.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width)
+            quickFactsBar.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -QuickFactsBar.height),
+            quickFactsBar.heightAnchor.constraint(equalToConstant: QuickFactsBar.height),
+            quickFactsBar.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            quickFactsBar.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width)
             ])
         
         self.view.addSubview(creditsButton)
@@ -260,10 +260,11 @@ class UnitViewController: UIViewController {
                                 self.resourceArray.append(character)
                             }
                             self.showAll()
-                            self.calcSmallestLargest()
                             self.currentItem = 0
                             self.pickerView.reloadAllComponents()
                             self.activity.stopAnimating()
+                            self.quickFactsBar.resource = self.resourceArray
+                            self.quickFactsBar.nextFact(sender: nil)
                         }
                     }
                 }
@@ -290,10 +291,11 @@ class UnitViewController: UIViewController {
                         self.resourceArray.append(veh)
                     }
                     self.showAll()
-                    self.calcSmallestLargest()
                     self.currentItem = 0
                     self.pickerView.reloadAllComponents()
                     self.activity.stopAnimating()
+                    self.quickFactsBar.resource = self.resourceArray
+                    self.quickFactsBar.nextFact(sender: nil)
                 }
             }
         case .Starship:
@@ -319,10 +321,11 @@ class UnitViewController: UIViewController {
                 
                     }
                     self.showAll()
-                    self.calcSmallestLargest()
                     self.currentItem = 0
                     self.pickerView.reloadAllComponents()
                     self.activity.stopAnimating()
+                    self.quickFactsBar.resource = self.resourceArray
+                    self.quickFactsBar.nextFact(sender: nil)
                 }
             }
         }
@@ -415,64 +418,5 @@ extension UnitViewController {
         self.metricsButton.isHidden = false
         self.englishButton.isHidden = false
         self.statusLabel.isHidden = true
-    }
-}
-
-extension UnitViewController {
-    func smallestName(array: [Resource]) -> String {
-        var smallest: Double = -1
-        var smallestName: String = "n/a"
-        if array.isEmpty {
-            return smallestName
-        }
-        for i in 0..<array.count {
-            if let value = array[i].measured {
-                smallest = value
-            }
-        }
-        if smallest == -1 {
-            return smallestName
-        }
-        for element in array {
-            guard let value = element.measured else {
-                break
-            }
-            if value < smallest {
-                smallest = value
-                smallestName = element.name
-            }
-        }
-        return smallestName
-    }
-    
-    func largestName(array: [Resource]) -> String {
-        var largest: Double = -1
-        var largestName: String = "n/a"
-        if array.isEmpty {
-            return largestName
-        }
-        for i in 0..<array.count {
-            if let value = array[i].measured {
-                largest = value
-            }
-        }
-        if largest == -1 {
-            return largestName
-        }
-        for element in array {
-            guard let value = element.measured else {
-                break
-            }
-            if value > largest {
-                largest = value
-                largestName = element.name
-            }
-        }
-        return largestName
-    }
-    
-    func calcSmallestLargest() {
-        self.smallestLargest.smallestValueLabel.text = smallestName(array: self.resourceArray)
-        self.smallestLargest.largestValueLabel.text = largestName(array: self.resourceArray)
     }
 }
