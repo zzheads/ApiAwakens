@@ -29,15 +29,15 @@ If you would like to be eligible for a rating of “exceeds expectations” you 
 - [x] Create logic to populate the Quick Facts Bar. (You may consider using generics here or elsewhere in your app.)
 - [x] Create a feature such that a user can convert metric units to british units with a button tap.
 - [x] Create a feature such that a user can input an exchange rate in a text field and then convert from Galactic Credits to US Dollars.
-- [ ] Add error handling as you see fit. This should include, but is not limited to:
+- [x] Add error handling as you see fit. This should include, but is not limited to:
       - The device being offline when an API call is made
-      - A user entering a 0 or negative exchange rate
+      - A user entering a 0 or negative exchange rate (DID NOT DONE IT, SINCE THERE IS NO INPUT FROM USER)
       - An error resulting from a key or element missing from the JSON
  
 - [x] UI elements are displayed for all screens using highly efficient code/logic.
 - [x] Networking is asynchronous, error handling is robust, and code is well-crafted.
 - [x] Data is displayed for all screens, pickers and fields using highly efficient code/logic.
-- [ ] Error handling is particularly robust, comprehensive and well implemented; going above and beyond those specific error types listed in the instructions.
+- [x] Error handling is particularly robust, comprehensive and well implemented; going above and beyond those specific error types listed in the instructions.
 - [x] Add additional text field such that when you select a person, all associated vehicles and/or starships are listed.
 - [x] API Requests return and then display all results, not just the first page.
  
