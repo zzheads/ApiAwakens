@@ -1,9 +1,11 @@
 # [ApiAwakens](https://teamtreehouse.com/projects/the-api-awakens)
-###by Alexey Papin [![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/zzheads/zzheads-at-gmail-com)
+###by Alexey Papin 
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/zzheads/zzheads-at-gmail-com)
 <img width="400"src="http://orig13.deviantart.net/55fb/f/2016/056/3/9/star_wars_logo_by_theflash17-d9t2ksh.png">
 
 [![Build Status](https://travis-ci.org/Jintin/Swimat.svg?branch=master)](https://travis-ci.org/Jintin/Swimat)
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/matteocrippa/awesome-swift)
+
+<img width="400"src="http://orig13.deviantart.net/55fb/f/2016/056/3/9/star_wars_logo_by_theflash17-d9t2ksh.png">
 
 ###About this Course
 
