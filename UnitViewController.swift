@@ -208,7 +208,7 @@ class UnitViewController: UIViewController {
         
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor, constant: 80),
             tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             ])
         
