@@ -5,9 +5,9 @@
 <img width="400"src="http://orig13.deviantart.net/55fb/f/2016/056/3/9/star_wars_logo_by_theflash17-d9t2ksh.png">
 
 
-<img width="300"src="screen1.png">
-<img width="300"src="screen2.png">
-<img width="300"src="screen3.png">
+<img width="200"src="screen1.png">
+<img width="200"src="screen2.png">
+<img width="200"src="screen3.png">
 
 ###About this Course
 
