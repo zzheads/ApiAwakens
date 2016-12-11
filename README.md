@@ -1,13 +1,13 @@
 # [ApiAwakens](https://teamtreehouse.com/projects/the-api-awakens)
-###by Alexey Papin [![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/zzheads/zzheads-at-gmail-com)[![Build Status](https://travis-ci.org/Jintin/Swimat.svg?branch=master)](https://travis-ci.org/Jintin/Swimat)
+###by Alexey Papin  [![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/zzheads/zzheads-at-gmail-com) [![Build Status](https://travis-ci.org/Jintin/Swimat.svg?branch=master)](https://travis-ci.org/Jintin/Swimat)
 
 
 <img width="400"src="http://orig13.deviantart.net/55fb/f/2016/056/3/9/star_wars_logo_by_theflash17-d9t2ksh.png">
 
 
-<img width="400"src="screen1.png">
-<img width="400"src="screen2.png">
-<img width="400"src="screen3.png">
+<img width="300"src="screen1.png">
+<img width="300"src="screen2.png">
+<img width="300"src="screen3.png">
 
 ###About this Course
 
