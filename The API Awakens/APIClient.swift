@@ -47,9 +47,7 @@ extension APIClient {
         let task = session.dataTask(with: request) { data, response, error in
             //print("Request in JSONTask: \(request)")
             guard let HTTPResponse = response as? HTTPURLResponse else {
-                let userInfo = [
-                    NSLocalizedDescriptionKey: NSLocalizedString("Missing HTTP Response", comment: "")
-                ]
+                let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString("Missing HTTP Response", comment: "")]
                 let error = NSError(domain: ZZHNetworkingErrorDomain, code: MissingHTTPResponseError, userInfo: userInfo)
                 completion(nil, nil, error)
                 return
@@ -60,6 +58,7 @@ extension APIClient {
                 }
             } else {
                 switch HTTPResponse.statusCode {
+                    
                 case 200:
                     do {
                         let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: AnyObject]
@@ -67,8 +66,17 @@ extension APIClient {
                     } catch let error {
                         completion(nil, HTTPResponse, error)
                     }
+                    
                 default:
-                    print("Received HTTP Response: \(HTTPResponse.statusCode) - not handled")
+                    var httpError = HTTPStatusCodeError.UnknownHTTPStatusCode
+                    if let err = HTTPStatusCodeError(rawValue: HTTPResponse.statusCode) {
+                        httpError = err
+                    }
+                    
+                    let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString(httpError.description, comment: "")]
+                    let error = NSError(domain: ZZHNetworkingErrorDomain, code: httpError.rawValue, userInfo: userInfo)
+                    completion(nil, HTTPResponse, error)
+                    return
                 }
             }
         }
@@ -83,14 +91,16 @@ extension APIClient {
                     if let error = error {
                         completion(.Failure(error))
                     } else {
-                        // TODO: Implement Error Handling
+                        completion(.Failure(HTTPStatusCodeError.UnknownHTTPStatusCode))
                     }
                     return
                 }
                 if let value = parse(json) {
                     completion(.Success(value))
                 } else {
-                    let error = NSError(domain: ZZHNetworkingErrorDomain, code: UnexpectedResponseError, userInfo: nil)
+                    let apiError = APIError.BadData
+                    let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString(apiError.description, comment: "")]
+                    let error = NSError(domain: ZZHNetworkingErrorDomain, code: apiError.rawValue, userInfo: userInfo)
                     completion(.Failure(error))
                 }
             }

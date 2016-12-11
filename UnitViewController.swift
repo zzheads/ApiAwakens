@@ -60,6 +60,28 @@ class UnitViewController: UIViewController {
         return activity
     }()
     
+    lazy var progress: UIProgressView = {
+        let progress = UIProgressView(progressViewStyle: .default)
+        progress.translatesAutoresizingMaskIntoConstraints = false
+        progress.backgroundColor = AppColor.Silver.color
+        progress.tintColor = AppColor.Blue.color
+        return progress
+    }()
+    
+    func progressTo(value: Float) {
+        progress.setProgress(value, animated: true)
+    }
+    
+    var currentLabelText: String = "" {
+        didSet {
+            statusLabel.text = currentLabelText
+        }
+    }
+    
+    func labelText(text: String) {
+        statusLabel.text = "\(currentLabelText) \(text)"
+    }
+    
     lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -73,7 +95,7 @@ class UnitViewController: UIViewController {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
-        pickerView.backgroundColor = AppColor.Dark.color
+        pickerView.backgroundColor = .white
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         return pickerView
     }()
@@ -166,6 +188,15 @@ class UnitViewController: UIViewController {
             activity.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: activity.bounds.size.height)
             ])
         activity.startAnimating()
+        
+        self.view.addSubview(progress)
+        NSLayoutConstraint.activate([
+            progress.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            progress.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width / 2),
+            //progress.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height / 100),
+            progress.topAnchor.constraint(equalTo: activity.bottomAnchor, constant: activity.bounds.size.height / 2)
+            ])
+        progress.setProgress(0, animated: true)
 
         self.view.addSubview(pickerView)
         NSLayoutConstraint.activate([
@@ -177,7 +208,7 @@ class UnitViewController: UIViewController {
         
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 80),
+            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             ])
         
@@ -216,14 +247,14 @@ class UnitViewController: UIViewController {
         switch self.unitType {
         case .Character:
             hideAll()
-            self.statusLabel.text = "Loading Characters..."
-            ResourcePage.fetchArray(resourceClass: Character.self) { characters in
-                self.statusLabel.text = "Loading Planets..."
-                ResourcePage.fetchArray(resourceClass: Planet.self) { planets in
-                    self.statusLabel.text = "Loading Vehicles..."
-                    ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
-                        self.statusLabel.text = "Loading Starships..."
-                        ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
+            self.currentLabelText = "Loading Characters"
+            ResourcePage.fetchArray(resourceClass: Character.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { characters in
+                self.currentLabelText = "Loading Planets"
+                ResourcePage.fetchArray(resourceClass: Planet.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { planets in
+                    self.currentLabelText = "Loading Vehicles"
+                    ResourcePage.fetchArray(resourceClass: Vehicle.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { vehicles in
+                        self.currentLabelText = "Loading Starships"
+                        ResourcePage.fetchArray(resourceClass: Starship.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { starships in
                             for i in 0..<characters.count {
                                 var character = characters[i]
                                 let urlPlanet = character.home
@@ -271,10 +302,10 @@ class UnitViewController: UIViewController {
             }
         case .Vehicle:
             hideAll()
-            self.statusLabel.text = "Loading Vehicles..."
-            ResourcePage.fetchArray(resourceClass: Vehicle.self) { vehicles in
-                self.statusLabel.text = "Loading Characters..."
-                ResourcePage.fetchArray(resourceClass: Character.self) { characters in
+            self.currentLabelText = "Loading Vehicles"
+            ResourcePage.fetchArray(resourceClass: Vehicle.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { vehicles in
+                self.currentLabelText = "Loading Characters"
+                ResourcePage.fetchArray(resourceClass: Character.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { characters in
                     for vehicle in vehicles {
                         var veh = vehicle
                         var pilotNames: [String] = []
@@ -300,10 +331,10 @@ class UnitViewController: UIViewController {
             }
         case .Starship:
             hideAll()
-            self.statusLabel.text = "Loading Starships..."
-            ResourcePage.fetchArray(resourceClass: Starship.self) { starships in
-                self.statusLabel.text = "Loading Characters..."
-                ResourcePage.fetchArray(resourceClass: Character.self) { characters in
+            self.currentLabelText = "Loading Starships"
+            ResourcePage.fetchArray(resourceClass: Starship.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { starships in
+                self.currentLabelText = "Loading Characters"
+                ResourcePage.fetchArray(resourceClass: Character.self, progressTo: self.progressTo(value: ), labelText: self.labelText(text: )) { characters in
                     for starship in starships {
                         var ship = starship
                         var pilotNames: [String] = []
@@ -355,8 +386,8 @@ extension UnitViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
-        label.textColor = AppColor.Blue.color
         label.backgroundColor = .clear
+        label.textColor = .black
         label.textAlignment = NSTextAlignment.center
         if (!resourceArray.isEmpty) {
             label.text = self.resourceArray[row].name
@@ -406,6 +437,8 @@ extension UnitViewController {
         self.metricsButton.isHidden = true
         self.englishButton.isHidden = true
         self.statusLabel.isHidden = false
+        self.activity.isHidden = false
+        self.progress.isHidden = false
     }
     
     func showAll() {
@@ -418,5 +451,7 @@ extension UnitViewController {
         self.metricsButton.isHidden = false
         self.englishButton.isHidden = false
         self.statusLabel.isHidden = true
+        self.activity.isHidden = true
+        self.progress.isHidden = true
     }
 }
