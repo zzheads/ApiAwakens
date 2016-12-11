@@ -206,9 +206,10 @@ class UnitViewController: UIViewController {
             pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -QuickFactsBar.height)
             ])
         
+        let topOfTableView = (self.navigationController?.navigationBar.bounds.size.height)! + UIApplication.shared.statusBarFrame.height + 16
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor, constant: 80),
+            tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topOfTableView),
             tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
             ])
         
